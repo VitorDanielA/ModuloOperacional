@@ -5,6 +5,7 @@
 package br.com.ifba.material.view;
 
 import br.com.ifba.infrastructure.service.Facade;
+import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.service.IFacade;
 import br.com.ifba.infrastructure.support.StringUtil;
 import br.com.ifba.material.model.Material;
@@ -19,7 +20,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaMaterial extends javax.swing.JFrame {
     //private IFacade facade = new Facade();
-    Facade facade = new Facade();
+    
+    DefaultTableModel listaTabela;
+    List<Material> lista;
+    List<Material> itemLista;
+    int selecionado;
+    
+    Material material;
     
     /**
      * Creates new form TelaMaterial
@@ -27,6 +34,18 @@ public class TelaMaterial extends javax.swing.JFrame {
     public TelaMaterial() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.itemLista = FacadeInstance.getInstance().getAllMaterial();
+        atualizarMaterial(this.itemLista);
+    }
+    
+    private void atualizarMaterial(List<Material> listaMaterial){
+        this.listaTabela =  new DefaultTableModel(null, new String [] {"Id", "Código", "Nome", "Descrição", "Valor"});
+        
+        for(Material al: listaMaterial){
+            listaTabela.addRow(new Object[]{al.getId(), al.getCodigo(), al.getNome(), al.getDescricao(), al.getValor()});
+        }
+        
+        this.tblTabela.setModel(this.listaTabela);
     }
     
     private boolean validarCampos(Material material){
@@ -82,77 +101,53 @@ public class TelaMaterial extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 160, 19));
 
         lblModulo.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        lblModulo.setForeground(new java.awt.Color(0, 0, 0));
         lblModulo.setText("Módulo");
 
         lblOperacional.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        lblOperacional.setForeground(new java.awt.Color(0, 0, 0));
         lblOperacional.setText("Operacional");
 
         lblMateriais.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
-        lblMateriais.setForeground(new java.awt.Color(0, 0, 0));
         lblMateriais.setText("Materiais");
 
         lblPesquisar.setBackground(new java.awt.Color(0, 0, 0));
-        lblPesquisar.setForeground(new java.awt.Color(0, 0, 0));
         lblPesquisar.setText("Pesquisar");
 
-        txtPesquisar.setBackground(new java.awt.Color(255, 255, 255));
-
-        tblTabela.setBackground(new java.awt.Color(255, 255, 255));
         tblTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Codigo", "Nome", "Estoque Atual", "Estoque Mínimo"
+
             }
         ));
+        tblTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTabela);
 
-        lblNome.setForeground(new java.awt.Color(0, 0, 0));
         lblNome.setText("Nome");
 
-        lblCodigo.setForeground(new java.awt.Color(0, 0, 0));
         lblCodigo.setText("Código");
 
-        lblValor.setForeground(new java.awt.Color(0, 0, 0));
         lblValor.setText("Valor");
 
-        txtNome.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtValor.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblDescricao.setForeground(new java.awt.Color(0, 0, 0));
         lblDescricao.setText("Descrição");
 
-        lblEstoqueAtual.setForeground(new java.awt.Color(0, 0, 0));
         lblEstoqueAtual.setText("Estoque Atual");
 
-        lblEstoqueMínimo.setForeground(new java.awt.Color(0, 0, 0));
         lblEstoqueMínimo.setText("Estoque Mínimo");
 
-        txtDescricao.setBackground(new java.awt.Color(255, 255, 255));
         txtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescricaoActionPerformed(evt);
             }
         });
 
-        txtEstoqueAtual.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtEstoqueMinimo.setBackground(new java.awt.Color(255, 255, 255));
-
         lblHome.setBackground(new java.awt.Color(0, 0, 0));
-        lblHome.setForeground(new java.awt.Color(0, 0, 0));
         lblHome.setText("HOME");
 
-        lblSair.setForeground(new java.awt.Color(0, 0, 0));
         lblSair.setText("SAIR");
 
         btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
@@ -340,19 +335,6 @@ public class TelaMaterial extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        String codigo = txtCodigo.getText();
-        String nome = txtNome.getText();
-        String descricao = txtDescricao.getText();
-        String valor = txtValor.getText();
-        String estoqueAtual = txtEstoqueAtual.getText();
-        String estoqueMinimo = txtEstoqueMinimo.getText();
-        
-        Material material = new Material();
-        
-        int linha = tblTabela.getSelectedRow();
-        Long id = (Long) tblTabela.getValueAt(linha, 0);
-        
-        material.setId(id);
         
         material.setCodigo(txtCodigo.getText());
         material.setNome(txtNome.getText());
@@ -361,70 +343,65 @@ public class TelaMaterial extends javax.swing.JFrame {
         material.setEstoqueAtual(txtEstoqueAtual.getText());
         material.setEstoqueMinimo(txtEstoqueMinimo.getText());
         
-        facade.updateMaterial(material);
+        FacadeInstance.getInstance().updateMaterial(material);
         
-        if(tblTabela.getSelectedRow() != -1){
-            tblTabela.setValueAt(txtCodigo.getText(), tblTabela.getSelectedRow(), 1);
-            tblTabela.setValueAt(txtNome.getText(), tblTabela.getSelectedRow(), 2);
-            tblTabela.setValueAt(txtEstoqueAtual.getText(), tblTabela.getSelectedRow(), 3);
-            tblTabela.setValueAt(txtEstoqueMinimo.getText(), tblTabela.getSelectedRow(), 4);
-        }
+        this.lista = FacadeInstance.getInstance().getAllMaterial();
+        
+        this.atualizarMaterial(this.lista);
+        
+        JOptionPane.showMessageDialog(null, "Material Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
+
+       
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         Material material = new Material();
         
-        String codigo = txtCodigo.getText();
-        String nome = txtNome.getText();
-        String descricao = txtDescricao.getText();
-        String valor = txtValor.getText();
-        String estoqueAtual = txtEstoqueAtual.getText();
-        String estoqueMinimo = txtEstoqueMinimo.getText();
+        material.setCodigo(txtCodigo.getText());
+        material.setNome(txtNome.getText());
+        material.setDescricao(txtDescricao.getText());
+        material.setValor(txtValor.getText());
+        material.setEstoqueAtual(txtEstoqueAtual.getText());
+        material.setEstoqueMinimo(txtEstoqueMinimo.getText());
         
-        material.setCodigo(codigo);
-        material.setNome(nome);
-        material.setDescricao(descricao);
-        material.setValor(valor);
-        material.setEstoqueAtual(estoqueAtual);
-        material.setEstoqueMinimo(estoqueMinimo);
+        if(validarCampos(material) == true){
+            FacadeInstance.getInstance().saveMaterial(material);
+            JOptionPane.showMessageDialog(null, "Material Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
+            
+            this.lista = FacadeInstance.getInstance().getAllMaterial();
         
-        if(this.validarCampos(material)==false){
-            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos e tente novamente!",
-            "Preencha os campos!", JOptionPane.INFORMATION_MESSAGE);
-            return;
+            this.atualizarMaterial(this.lista);
         }
         
-        facade.saveMaterial(material);
-        
-        DefaultTableModel table = (DefaultTableModel) tblTabela.getModel();
-        Object[] dados = {material.getCodigo(),material.getNome(),material.getEstoqueAtual(),material.getEstoqueMinimo()};
-        table.addRow(dados); 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        Material material = new Material();
+        FacadeInstance.getInstance().deleteMaterial(material);
+        this.lista = FacadeInstance.getInstance().getAllMaterial();
+        this.atualizarMaterial(this.lista);
         
-        int linha = tblTabela.getSelectedRow();
-        Long id = (Long) tblTabela.getValueAt(linha, 0);
-        
-        material.setId(id);
-        
-        facade.deleteMaterial(material);
-        
-        if(tblTabela.getSelectedRow() != -1){
-            DefaultTableModel tab = (DefaultTableModel) tblTabela.getModel();
-            tab.removeRow(tblTabela.getSelectedRow());
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro na exclusão da tarefa!");
-        }
+        this.selecionado = -1;
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
         // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
+    private void tblTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTabelaMouseClicked
+        // TODO add your handling code here:
+        
+        this.selecionado = this.tblTabela.getSelectedRow();
+        
+        if(this.selecionado != -1){
+            this.material = this.itemLista.get(this.selecionado);
+        }
+    }//GEN-LAST:event_tblTabelaMouseClicked
+                                       
+
+    
     /**
      * @param args the command line arguments
      */
