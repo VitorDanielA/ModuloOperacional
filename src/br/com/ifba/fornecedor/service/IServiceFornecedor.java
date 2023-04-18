@@ -4,6 +4,7 @@
  */
 package br.com.ifba.fornecedor.service;
 import br.com.ifba.fornecedor.model.Fornecedor;
+import br.com.ifba.material.model.Material;
 import java.util.List;
 /**
  *
@@ -14,5 +15,6 @@ public interface IServiceFornecedor {
     public abstract Fornecedor updateFornecedor(Fornecedor fornecedor);
     public abstract void deleteFornecedor(Fornecedor fornecedor);
     public abstract List<Fornecedor> getAllFornecedor();
-    public List<Fornecedor> findByName(String name);
+    public List<Fornecedor> findByNameFornecedor(String name);
+    public Fornecedor findByIdFornecedor(Long id);
 }

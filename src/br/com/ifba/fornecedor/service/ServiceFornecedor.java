@@ -8,6 +8,7 @@ import br.com.ifba.fornecedor.dao.DaoFornecedor;
 import br.com.ifba.fornecedor.dao.IDaoFornecedor;
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.infrastructure.exception.BusinessException;
+import br.com.ifba.material.model.Material;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ public class ServiceFornecedor implements IServiceFornecedor{
     }
 
     @Override
-    public List<Fornecedor> findByName(String name) {
+    public List<Fornecedor> findByNameFornecedor(String name) {
         if(name == null){
             throw new BusinessException("Nome null");
         } else if(name.isEmpty()){
@@ -81,4 +82,10 @@ public class ServiceFornecedor implements IServiceFornecedor{
             return daoFornecedor.findByName(name);
         }
     }
+
+    @Override
+    public Fornecedor findByIdFornecedor(Long id) {
+        return daoFornecedor.findById(id);
+    }
+   
 }

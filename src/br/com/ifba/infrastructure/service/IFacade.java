@@ -5,6 +5,7 @@
  */
 package br.com.ifba.infrastructure.service;
 
+import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.usuario.model.Usuario;
 import java.util.List;
@@ -39,4 +40,21 @@ public interface IFacade {
     public List<Material> findByNameMaterial(String name);
     
     public Material findByIdMaterial(Long id);
+    
+    
+     // ------------------- Material -------------------------------//
+    
+    public abstract Fornecedor saveFornecedor(Fornecedor fornecedor);
+    
+    public abstract Fornecedor updateFornecedor(Fornecedor fornecedor);
+    
+    public abstract void deleteFornecedor(Fornecedor fornecedor);
+    
+    public List<Fornecedor> getAllFornecedor();
+    
+    public List<Fornecedor> findByNameFornecedor(String name);
+    
+    public Fornecedor findByIdFornecedor(Long id);
+    
+    
 }

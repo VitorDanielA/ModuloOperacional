@@ -6,6 +6,9 @@
 package br.com.ifba.infrastructure.service;
 
 
+import br.com.ifba.fornecedor.model.Fornecedor;
+import br.com.ifba.fornecedor.service.IServiceFornecedor;
+import br.com.ifba.fornecedor.service.ServiceFornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.material.service.IServiceMaterial;
 import br.com.ifba.material.service.ServiceMaterial;
@@ -82,4 +85,40 @@ public class Facade implements IFacade {
     public Material findByIdMaterial(Long id) {
         return serviceMaterial.findByIdMaterial(id);
     }
+
+        // -----------------Material-------------------//
+    
+    private final IServiceFornecedor serviceFornecedor = new ServiceFornecedor();
+     
+    @Override
+    public Fornecedor saveFornecedor(Fornecedor fornecedor) {
+        return serviceFornecedor.saveFornecedor(fornecedor);
+    }
+
+    @Override
+    public Fornecedor updateFornecedor(Fornecedor fornecedor) {
+        return serviceFornecedor.updateFornecedor(fornecedor);
+    }
+
+    @Override
+    public void deleteFornecedor(Fornecedor fornecedor) {
+        this.serviceFornecedor.deleteFornecedor(fornecedor);
+    }
+
+    @Override
+    public List<Fornecedor> getAllFornecedor() {
+        return serviceFornecedor.getAllFornecedor();
+    }
+     @Override
+    public List<Fornecedor> findByNameFornecedor(String name) {
+        return serviceFornecedor.findByNameFornecedor(name);
+    }
+
+    @Override
+    public Fornecedor findByIdFornecedor(Long id) {
+        return serviceFornecedor.findByIdFornecedor(id);
+    }
+
+  
+
 }
