@@ -6,6 +6,9 @@
 package br.com.ifba.infrastructure.service;
 
 
+import br.com.ifba.material.model.Material;
+import br.com.ifba.material.service.IServiceMaterial;
+import br.com.ifba.material.service.ServiceMaterial;
 import java.util.List;
 import br.com.ifba.usuario.model.Usuario;
 import br.com.ifba.usuario.service.IServiceUsuario;
@@ -46,5 +49,37 @@ public class Facade implements IFacade {
         return serviceUsuario.findByName(name);
     }
 
+    // -----------------Material-------------------//
     
+    private final IServiceMaterial serviceMaterial = new ServiceMaterial();
+    
+    @Override
+    public Material saveMaterial(Material material) {
+        return serviceMaterial.saveMaterial(material);
+    }
+
+    @Override
+    public Material updateMaterial(Material material) {
+        return serviceMaterial.updateMaterial(material);
+    }
+
+    @Override
+    public void deleteMaterial(Material material) {
+        this.serviceMaterial.deleteMaterial(material);
+    }
+
+    @Override
+    public List<Material> getAllMaterial() {
+        return serviceMaterial.getAllMaterial();
+    }
+
+    @Override
+    public List<Material> findByNameMaterial(String name) {
+        return serviceMaterial.findByNameMaterial(name);
+    }
+
+    @Override
+    public Material findByIdMaterial(Long id) {
+        return serviceMaterial.findByIdMaterial(id);
+    }
 }

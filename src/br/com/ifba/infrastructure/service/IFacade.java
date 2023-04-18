@@ -5,6 +5,7 @@
  */
 package br.com.ifba.infrastructure.service;
 
+import br.com.ifba.material.model.Material;
 import br.com.ifba.usuario.model.Usuario;
 import java.util.List;
 
@@ -26,4 +27,16 @@ public interface IFacade {
     public List<Usuario> findByName(String name);
 
     
+    // ------------------- Material -------------------------------//
+    public abstract Material saveMaterial(Material material);
+    
+    public abstract Material updateMaterial(Material material);
+    
+    public abstract void deleteMaterial(Material material);
+    
+    public List<Material> getAllMaterial();
+    
+    public List<Material> findByNameMaterial(String name);
+    
+    public Material findByIdMaterial(Long id);
 }
