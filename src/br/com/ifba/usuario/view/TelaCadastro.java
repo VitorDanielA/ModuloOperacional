@@ -27,8 +27,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     
      //private RedefinirSenha telaRedefinir = new RedefinirSenha(); 
      
-     private TelaUsuario telaExibir = new TelaUsuario();
-     private Principal principal = new Principal();
+     private TelaUsuario telaExibir;
     
     
     /**
@@ -327,22 +326,17 @@ public class TelaCadastro extends javax.swing.JFrame {
             return;
         }
         
-         try {
-            this.facade.saveUsuario(usuario);
-            this.setVisible(false);
-            this.telaExibir.setVisible(true);
-          this.telaExibir.atualizarTabela();
-        } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, error, 
-                    "Erro ao cadastrar!", JOptionPane.ERROR_MESSAGE);
-        }
+        this.facade.saveUsuario(usuario);
+            
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         // TODO add your handling code here:
         this.makeLogin();
         this.setVisible(false);
-        this.principal.setVisible(true);
+        Principal principal = new Principal();
+
+        principal.setVisible(true);
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

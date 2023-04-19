@@ -19,7 +19,6 @@ public class RedefinirSenha extends javax.swing.JFrame {
 
     private IFacade facade = new Facade();
     
-    private TelaCadastro telaCadastro = new TelaCadastro();
     private TelaUsuario telaExibir;
     
     private List<Usuario> usuarios;
@@ -326,7 +325,8 @@ public class RedefinirSenha extends javax.swing.JFrame {
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        this.telaCadastro.setVisible(true);
+        TelaCadastro telaCadastro = new TelaCadastro();
+        telaCadastro.setVisible(true);
        // this.telaExibir.atualizarTabela(); 
     }//GEN-LAST:event_btnvoltarActionPerformed
 

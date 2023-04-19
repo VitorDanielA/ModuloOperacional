@@ -22,8 +22,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaMaterial extends javax.swing.JFrame {
     //private IFacade facade = new Facade();
-    Principal principal = new Principal();
-    TelaCadastro cadastro = new TelaCadastro();
     DefaultTableModel listaTabela;
     List<Material> lista;
     List<Material> itemLista;
@@ -420,13 +418,15 @@ public class TelaMaterial extends javax.swing.JFrame {
     private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.principal.setVisible(true);
+        Principal principal = new Principal();
+        principal.setVisible(true);
     }//GEN-LAST:event_lblHomeMouseClicked
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.cadastro.setVisible(true);
+        TelaCadastro cadastro = new TelaCadastro();
+        cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
                                        
 

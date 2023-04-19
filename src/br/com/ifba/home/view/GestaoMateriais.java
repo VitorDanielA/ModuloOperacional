@@ -13,16 +13,12 @@ import br.com.ifba.usuario.view.TelaCadastro;
  *
  * @author Ellen Cristina
  */
-public class Gestao_Materiais extends javax.swing.JFrame {
+public class GestaoMateriais extends javax.swing.JFrame {
 
-    TelaMaterial material = new TelaMaterial();
-    TelaFornecedor fornecedor = new TelaFornecedor();
-    Principal principal = new Principal();
-    TelaCadastro cadastro = new TelaCadastro();
     /**
      * Creates new form Gestao
      */
-    public Gestao_Materiais() {
+    public GestaoMateriais() {
         initComponents();
          this.setLocationRelativeTo(null);
     }
@@ -162,25 +158,29 @@ public class Gestao_Materiais extends javax.swing.JFrame {
     private void btnMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateriaisActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        this.material.setVisible(true);
+        TelaMaterial material = new TelaMaterial();
+        material.setVisible(true);
     }//GEN-LAST:event_btnMateriaisActionPerformed
 
     private void btnFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedoresActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        this.fornecedor.setVisible(true);
+        TelaFornecedor fornecedor = new TelaFornecedor();
+        fornecedor.setVisible(true);
     }//GEN-LAST:event_btnFornecedoresActionPerformed
 
     private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.principal.setVisible(true);
+        Principal principal = new Principal();
+        principal.setVisible(true);
     }//GEN-LAST:event_lblHomeMouseClicked
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.cadastro.setVisible(true);
+        TelaCadastro cadastro = new TelaCadastro();
+        cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
 
     /**
@@ -200,21 +200,23 @@ public class Gestao_Materiais extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gestao_Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestaoMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gestao_Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestaoMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gestao_Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestaoMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Gestao_Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestaoMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gestao_Materiais().setVisible(true);
+                new GestaoMateriais().setVisible(true);
             }
         });
     }

@@ -18,14 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author felip
  */
 public class TelaUsuario extends javax.swing.JFrame {
-
-     Principal principal = new Principal();
      
      private IFacade facade = new Facade();
     
     //private TelaEditarUsuario telaEditar;
     
-    private TelaCadastro telaCadastro;
 
     private List<Usuario> usuarios;
     
@@ -230,9 +227,9 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        this.telaCadastro.setVisible(true);
         this.setVisible(false);
-        
+        TelaCadastro telaCadastro = new TelaCadastro();
+        telaCadastro.setVisible(true);       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -264,11 +261,6 @@ public class TelaUsuario extends javax.swing.JFrame {
             
             
             
-            
-            
-            
-            
-            
             // Acessando fachada para excluir dados
           //  List<Usuario> usuarioRemover = this.facade.findByLogin(login);
             
@@ -291,7 +283,8 @@ public class TelaUsuario extends javax.swing.JFrame {
     private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.principal.setVisible(true);
+        Principal principal = new Principal();
+        principal.setVisible(true);
     }//GEN-LAST:event_lblHomeMouseClicked
 
     /**

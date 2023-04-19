@@ -14,10 +14,6 @@ import br.com.ifba.usuario.view.TelaUsuario;
  */
 public class Principal extends javax.swing.JFrame {
     
-    Gestao_Materiais gmaterial = new Gestao_Materiais();
-    TelaUsuario usuario = new TelaUsuario();
-    TelaCadastro cadastro = new TelaCadastro();
-
     /**
      * Creates new form Principal
      */
@@ -205,8 +201,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        this.gmaterial.setVisible(true);
+        this.setVisible(false);     
+        GestaoMateriais gmaterial = new GestaoMateriais();
+        gmaterial.setVisible(true);
     }//GEN-LAST:event_btnMaterialActionPerformed
 
     private void btnGestaoOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestaoOrdemActionPerformed
@@ -216,7 +213,8 @@ public class Principal extends javax.swing.JFrame {
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        this.usuario.setVisible(true);
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnControleEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleEstoqueActionPerformed
@@ -225,12 +223,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnGestaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestaoProdutosActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnGestaoProdutosActionPerformed
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.cadastro.setVisible(true);
+        TelaCadastro cadastro = new TelaCadastro();
+        cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
 
     /**

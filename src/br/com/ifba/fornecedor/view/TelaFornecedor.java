@@ -21,8 +21,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaFornecedor extends javax.swing.JFrame {
     
-     Principal principal = new Principal();
-     TelaCadastro cadastro = new TelaCadastro();
     /**
      * Creates new form Fornecedores
      */
@@ -33,7 +31,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
     
     Fornecedor fornecedor;
     public TelaFornecedor() {
-         initComponents();
+        initComponents();
         this.setLocationRelativeTo(null);
         this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
         atualizarFornecedor(this.itemLista);
@@ -108,7 +106,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel3.setText("Fornecedores");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/telinhas/img/modulo.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/modulo.png"))); // NOI18N
 
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/add-java.png"))); // NOI18N
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -213,26 +211,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(325, 325, 325)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblHome)
-                                .addGap(37, 37, 37)
-                                .addComponent(lblSair)))
-                        .addGap(55, 55, 55))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,27 +265,45 @@ public class TelaFornecedor extends javax.swing.JFrame {
                                                 .addGap(32, 32, 32))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))))))))
+                                                .addGap(0, 0, Short.MAX_VALUE))))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblHome)
+                                .addGap(37, 37, 37)
+                                .addComponent(lblSair)
+                                .addGap(55, 55, 55))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(36, 36, 36))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(325, 325, 325)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSair)
                             .addComponent(jLabel5)
                             .addComponent(lblHome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(7, 7, 7)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -357,7 +354,6 @@ public class TelaFornecedor extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
-
             Fornecedor forn = new Fornecedor();
             forn.setNome(txtNome.getText());
             forn.setEmail(txtEmail.getText());
@@ -366,15 +362,15 @@ public class TelaFornecedor extends javax.swing.JFrame {
             forn.setEndereco(txtEndereco.getText());
             forn.setRazaoSocial(txtRazaoSocial.getText());
 
-            forn = FacadeInstance.getInstance().saveFornecedor(forn);
+            FacadeInstance.getInstance().saveFornecedor(forn);
            
-            if(validarCampos(fornecedor) == true){
-            FacadeInstance.getInstance().saveFornecedor(fornecedor);
-            JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
+            if(validarCampos(forn) == true){
+                FacadeInstance.getInstance().saveFornecedor(fornecedor);
+                JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
             
-            this.lista = FacadeInstance.getInstance().getAllFornecedor();
+                this.lista = FacadeInstance.getInstance().getAllFornecedor();
         
-            this.atualizarFornecedor(this.lista);
+                this.atualizarFornecedor(this.lista);
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -444,13 +440,15 @@ public class TelaFornecedor extends javax.swing.JFrame {
     private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.principal.setVisible(true);
+        Principal principal = new Principal();
+        principal.setVisible(true);
     }//GEN-LAST:event_lblHomeMouseClicked
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        this.cadastro.setVisible(true);
+        TelaCadastro cadastro = new TelaCadastro(); 
+        cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
 
     /**
