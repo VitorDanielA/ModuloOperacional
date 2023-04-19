@@ -93,7 +93,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(175, 217, 213));
+        jPanel1.setBackground(new java.awt.Color(51, 160, 19));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel5.setText("Módulo");
