@@ -1,14 +1,18 @@
+package br.com.ifba.usuario.view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.ifba.usuario.view;
+
 
 import br.com.ifba.infrastructure.service.Facade;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.service.IFacade;
 import br.com.ifba.infrastructure.support.StringUtil;
 import br.com.ifba.usuario.model.Usuario;
+import br.com.ifba.usuario.view.RedefinirSenha;
+import br.com.ifba.usuario.view.TelaUsuario;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -337,9 +341,9 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-              RedefinirSenha telaRedefinir = new RedefinirSenha(); 
-
-                    telaRedefinir.setVisible(true);
+        RedefinirSenha telaRedefinir = new RedefinirSenha(); 
+        setVisible(false);
+        telaRedefinir.setVisible(true);
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
