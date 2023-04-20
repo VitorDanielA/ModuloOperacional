@@ -78,8 +78,8 @@ public class TelaUsuario extends javax.swing.JFrame {
         lblUsuario1 = new javax.swing.JLabel();
         txtUsuario2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtSenha2 = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        txtSenha2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,8 +144,6 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Senha");
 
-        txtSenha2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setBorder(null);
@@ -180,11 +178,11 @@ public class TelaUsuario extends javax.swing.JFrame {
                                 .addGap(51, 51, 51)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSenha2, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblUsuario1)
-                                    .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(txtSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtUsuario2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jLabel11))))
                         .addGap(40, 40, 40))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,8 +232,8 @@ public class TelaUsuario extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE))
+                                .addComponent(txtSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -383,7 +381,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblHome;
     private javax.swing.JLabel lblUsuario1;
     private javax.swing.JTable tblDados;
-    private javax.swing.JTextField txtSenha2;
+    private javax.swing.JPasswordField txtSenha2;
     private javax.swing.JTextField txtUsuario2;
     // End of variables declaration//GEN-END:variables
 }
