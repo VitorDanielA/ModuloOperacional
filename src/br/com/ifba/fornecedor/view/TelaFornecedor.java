@@ -25,9 +25,8 @@ public class TelaFornecedor extends javax.swing.JFrame {
      * Creates new form Fornecedores
      */
     DefaultTableModel listaTabela;
-    List<Fornecedor> lista;
     List<Fornecedor> itemLista;
-    int selecionado;
+    int selecionado = -1;
     
     Fornecedor fornecedor;
     public TelaFornecedor() {
@@ -133,6 +132,11 @@ public class TelaFornecedor extends javax.swing.JFrame {
                 "Nome", "Telefone", "Email", "CNPJ"
             }
         ));
+        tblTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTabela);
 
         jLabel6.setText("Pesquisar:");
@@ -353,24 +357,22 @@ public class TelaFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        
-            Fornecedor forn = new Fornecedor();
-            forn.setNome(txtNome.getText());
-            forn.setEmail(txtEmail.getText());
-            forn.setTelefone(txtTelefone.getText());
-            forn.setCnpj(txtCNPJ.getText());
-            forn.setEndereco(txtEndereco.getText());
-            forn.setRazaoSocial(txtRazaoSocial.getText());
-
-            FacadeInstance.getInstance().saveFornecedor(forn);
+            
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor.setNome(txtNome.getText());
+            fornecedor.setEmail(txtEmail.getText());
+            fornecedor.setTelefone(txtTelefone.getText());
+            fornecedor.setCnpj(txtCNPJ.getText());
+            fornecedor.setEndereco(txtEndereco.getText());
+            fornecedor.setRazaoSocial(txtRazaoSocial.getText());
            
-            if(validarCampos(forn) == true){
+            if(validarCampos(fornecedor) == true){
                 FacadeInstance.getInstance().saveFornecedor(fornecedor);
                 JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
             
-                this.lista = FacadeInstance.getInstance().getAllFornecedor();
+                this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
         
-                this.atualizarFornecedor(this.lista);
+                this.atualizarFornecedor(this.itemLista);
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -378,8 +380,8 @@ public class TelaFornecedor extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
          // TODO add your handling code here:
         FacadeInstance.getInstance().deleteFornecedor(fornecedor);
-        this.lista = FacadeInstance.getInstance().getAllFornecedor();
-        this.atualizarFornecedor(this.lista);
+        this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
+        this.atualizarFornecedor(this.itemLista);
         
         this.selecionado = -1;
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -407,31 +409,22 @@ public class TelaFornecedor extends javax.swing.JFrame {
     private void txtRazaoSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRazaoSocialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRazaoSocialActionPerformed
-     private void tblTabelaMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        // TODO add your handling code here:
-        
-        this.selecionado = this.tblTabela.getSelectedRow();
-        
-        if(this.selecionado != -1){
-            this.fornecedor = this.itemLista.get(this.selecionado);
-        }
-    }        
+            
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
          
-        Fornecedor forn = new Fornecedor();
-        forn.setNome(txtNome.getText());
-        forn.setEmail(txtEmail.getText());
-        forn.setTelefone(txtTelefone.getText());
-        forn.setCnpj(txtCNPJ.getText());
-        forn.setEndereco(txtEndereco.getText());
-        forn.setRazaoSocial(txtRazaoSocial.getText());
+        fornecedor.setNome(txtNome.getText());
+        fornecedor.setEmail(txtEmail.getText());
+        fornecedor.setTelefone(txtTelefone.getText());
+        fornecedor.setCnpj(txtCNPJ.getText());
+        fornecedor.setEndereco(txtEndereco.getText());
+        fornecedor.setRazaoSocial(txtRazaoSocial.getText());
 
         FacadeInstance.getInstance().updateFornecedor(fornecedor);
         
         
-        this.lista = FacadeInstance.getInstance().getAllFornecedor();
+        this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
         
-        this.atualizarFornecedor(this.lista);
+        this.atualizarFornecedor(this.itemLista);
         
         JOptionPane.showMessageDialog(null, "Fornecedor Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
        
@@ -450,6 +443,15 @@ public class TelaFornecedor extends javax.swing.JFrame {
         TelaCadastro cadastro = new TelaCadastro(); 
         cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
+
+    private void tblTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTabelaMouseClicked
+        // TODO add your handling code here:
+        this.selecionado = this.tblTabela.getSelectedRow();
+        
+        if(this.selecionado > 0){
+            this.fornecedor = this.itemLista.get(this.selecionado);
+        }
+    }//GEN-LAST:event_tblTabelaMouseClicked
 
     /**
      * @param args the command line arguments

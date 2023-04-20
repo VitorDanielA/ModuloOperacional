@@ -25,7 +25,7 @@ public class TelaMaterial extends javax.swing.JFrame {
     DefaultTableModel listaTabela;
     List<Material> lista;
     List<Material> itemLista;
-    int selecionado;
+    int selecionado = -1;
     
     Material material;
     
@@ -347,21 +347,22 @@ public class TelaMaterial extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         
-        material.setCodigo(txtCodigo.getText());
-        material.setNome(txtNome.getText());
-        material.setDescricao(txtDescricao.getText());
-        material.setValor(txtValor.getText());
-        material.setEstoqueAtual(txtEstoqueAtual.getText());
-        material.setEstoqueMinimo(txtEstoqueMinimo.getText());
-        
-        FacadeInstance.getInstance().updateMaterial(material);
-        
-        this.lista = FacadeInstance.getInstance().getAllMaterial();
-        
-        this.atualizarMaterial(this.lista);
-        
-        JOptionPane.showMessageDialog(null, "Material Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
+        if(this.material.getId() != null){
+            material.setCodigo(txtCodigo.getText());
+            material.setNome(txtNome.getText());
+            material.setDescricao(txtDescricao.getText());
+            material.setValor(txtValor.getText());
+            material.setEstoqueAtual(txtEstoqueAtual.getText());
+            material.setEstoqueMinimo(txtEstoqueMinimo.getText());
 
+            FacadeInstance.getInstance().updateMaterial(material);
+
+            this.lista = FacadeInstance.getInstance().getAllMaterial();
+
+            this.atualizarMaterial(this.lista);
+
+            JOptionPane.showMessageDialog(null, "Material Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
+        }
        
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -406,7 +407,7 @@ public class TelaMaterial extends javax.swing.JFrame {
         
         this.selecionado = this.tblTabela.getSelectedRow();
         
-        if(this.selecionado != -1){
+        if(this.selecionado >= 0){
             this.material = this.itemLista.get(this.selecionado);
         }
     }//GEN-LAST:event_tblTabelaMouseClicked
