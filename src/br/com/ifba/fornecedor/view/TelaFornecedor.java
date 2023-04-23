@@ -554,7 +554,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
         this.itemLista = FacadeInstance.getInstance().getAllFornecedor();//pegando a lista de fornecedores
         int i = 0;
         for(; this.itemLista.size() > i; i++){
-            if(pesq.equals(itemLista.get(i).getNome())){/*checando se o nome
+            if(pesq.equals(itemLista.get(i).getNome())){/*checando. se o nome
                 digitado no campo é igual a algum nome dos fornecedores*/
               listaPesquisa.add(itemLista.get(i));//o fornecedor que tem o nome condizente a pesquisa é passado para a nova listra             
             }
