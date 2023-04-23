@@ -9,8 +9,10 @@ import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.home.view.Principal;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.support.StringUtil;
-import br.com.ifba.material.model.Material;
 import br.com.ifba.usuario.view.TelaCadastro;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +27,8 @@ public class TelaFornecedor extends javax.swing.JFrame {
      * Creates new form Fornecedores
      */
     DefaultTableModel listaTabela;
-    List<Fornecedor> itemLista;
+    List<Fornecedor> itemLista= new ArrayList<>();
+    List<Fornecedor> listaPesquisa = new ArrayList<>();
     int selecionado = -1;
     
     Fornecedor fornecedor;
@@ -75,7 +78,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabela = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        txtPesquisar = new javax.swing.JTextField();
+        txtPesquisa = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -140,6 +143,17 @@ public class TelaFornecedor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblTabela);
 
         jLabel6.setText("Pesquisar:");
+
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyReleased(evt);
+            }
+        });
 
         jLabel9.setText("Nome:");
 
@@ -222,7 +236,8 @@ public class TelaFornecedor extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
@@ -305,7 +320,7 @@ public class TelaFornecedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -447,6 +462,22 @@ public class TelaFornecedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
 
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+     
+      
+    }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+        
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   checaLista();
+                }
+            }
+        });
+    }//GEN-LAST:event_txtPesquisaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -513,9 +544,22 @@ public class TelaFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtPesquisar;
+    private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtRazaoSocial;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
- }
+
+    public void checaLista(){
+        String pesq = txtPesquisa.getText();//pegando o nome para pesquisar na lista de fornecedores
+        this.itemLista = FacadeInstance.getInstance().getAllFornecedor();//pegando a lista de fornecedores
+        int i = 0;
+        for(; this.itemLista.size() > i; i++){
+            if(pesq.equals(itemLista.get(i).getNome())){/*checando se o nome
+                digitado no campo é igual a algum nome dos fornecedores*/
+              listaPesquisa.add(itemLista.get(i));//o fornecedor que tem o nome condizente a pesquisa é passado para a nova listra             
+            }
+        }
+        this.atualizarFornecedor(listaPesquisa);//Mostrando na lista;
+    }
+}
 
