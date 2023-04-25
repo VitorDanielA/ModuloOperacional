@@ -159,10 +159,17 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         // TODO add your handling code here:
         this.makeLogin();
-        this.setVisible(false);
-        Principal principal = new Principal();
+        
+        Usuario usu = this.validateLogin();
+        
+        if(usu != null){
+            this.setVisible(false);
+            Principal principal = new Principal();
 
-        principal.setVisible(true);
+            principal.setVisible(true);
+        }
+
+        
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
