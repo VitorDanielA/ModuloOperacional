@@ -552,13 +552,15 @@ public class TelaFornecedor extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void checaLista(){
+        listaPesquisa.clear();
         String pesq = txtPesquisa.getText();//pegando o nome para pesquisar na lista de fornecedores
         this.itemLista = FacadeInstance.getInstance().getAllFornecedor();//pegando a lista de fornecedores
         int i = 0;
         for(; this.itemLista.size() > i; i++){
             if(pesq.equals(itemLista.get(i).getNome())){/*checando. se o nome
                 digitado no campo é igual a algum nome dos fornecedores*/
-              listaPesquisa.add(itemLista.get(i));//o fornecedor que tem o nome condizente a pesquisa é passado para a nova listra             
+              listaPesquisa.add(itemLista.get(i));//o fornecedor que tem o nome condizente a 
+              //pesquisa é passado para a nova listra             
             }
         }
         this.atualizarFornecedor(listaPesquisa);//Mostrando na lista;
