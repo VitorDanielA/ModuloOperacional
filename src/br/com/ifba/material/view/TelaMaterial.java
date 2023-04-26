@@ -4,7 +4,7 @@
  */
 package br.com.ifba.material.view;
 
-import br.com.ifba.home.view.Principal;
+import br.com.ifba.home.view.TelaPrincipal;
 import br.com.ifba.infrastructure.service.Facade;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.service.IFacade;
@@ -422,7 +422,7 @@ public class TelaMaterial extends javax.swing.JFrame {
     private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        Principal principal = new Principal();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(true);
     }//GEN-LAST:event_lblHomeMouseClicked
 

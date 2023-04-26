@@ -6,7 +6,7 @@ package br.com.ifba.usuario.view;
  */
 
 
-import br.com.ifba.home.view.Principal;
+import br.com.ifba.home.view.TelaPrincipal;
 import br.com.ifba.infrastructure.service.Facade;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.service.IFacade;
@@ -164,12 +164,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         
         if(usu != null){
             this.setVisible(false);
-            Principal principal = new Principal();
-
+            TelaPrincipal principal = new TelaPrincipal();
             principal.setVisible(true);
         }
-
-        
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
