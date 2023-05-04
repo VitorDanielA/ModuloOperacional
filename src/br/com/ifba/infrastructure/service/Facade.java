@@ -12,7 +12,7 @@ import br.com.ifba.fornecedor.service.ServiceFornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.material.service.IServiceMaterial;
 import br.com.ifba.material.service.ServiceMaterial;
-import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.produto.service.IServiceProduto;
 import br.com.ifba.produto.service.ServiceProduto;
 import java.util.List;

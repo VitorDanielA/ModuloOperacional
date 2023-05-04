@@ -8,7 +8,7 @@ package br.com.ifba.produto.service;
 import br.com.ifba.infrastructure.exception.BusinessException;
 import br.com.ifba.produto.dao.DaoProduto;
 import br.com.ifba.produto.dao.IDaoProduto;
-import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produtos.model.Produto;
 import java.util.List;
 
 /**

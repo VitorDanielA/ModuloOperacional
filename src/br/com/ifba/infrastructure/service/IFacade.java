@@ -7,7 +7,7 @@ package br.com.ifba.infrastructure.service;
 
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
-import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.usuario.model.Usuario;
 import java.util.List;
 

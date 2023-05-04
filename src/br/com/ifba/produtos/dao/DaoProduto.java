@@ -6,7 +6,7 @@
 package br.com.ifba.produto.dao;
 
 import br.com.ifba.infrastructure.basedao.BaseDao;
-import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produtos.model.Produto;
 import java.util.List;
 import javax.persistence.Query;
 

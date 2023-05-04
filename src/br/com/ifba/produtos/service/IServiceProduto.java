@@ -5,7 +5,7 @@
  */
 package br.com.ifba.produto.service;
 
-import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produtos.model.Produto;
 import java.util.List;
 
 /**
