@@ -12,6 +12,9 @@ import br.com.ifba.fornecedor.service.ServiceFornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.material.service.IServiceMaterial;
 import br.com.ifba.material.service.ServiceMaterial;
+import br.com.ifba.produto.model.Produto;
+import br.com.ifba.produto.service.IServiceProduto;
+import br.com.ifba.produto.service.ServiceProduto;
 import java.util.List;
 import br.com.ifba.usuario.model.Usuario;
 import br.com.ifba.usuario.service.IServiceUsuario;
@@ -86,7 +89,7 @@ public class Facade implements IFacade {
         return serviceMaterial.findByIdMaterial(id);
     }
 
-        // -----------------Material-------------------//
+    // -----------------Fornecedor-------------------//
     
     private final IServiceFornecedor serviceFornecedor = new ServiceFornecedor();
      
@@ -118,7 +121,39 @@ public class Facade implements IFacade {
     public Fornecedor findByIdFornecedor(Long id) {
         return serviceFornecedor.findByIdFornecedor(id);
     }
+    
+    // -----------------Produto-------------------//
+    
+    private final IServiceProduto serviceProduto = new ServiceProduto();
 
-  
+    @Override
+    public Produto saveProduto(Produto produto) {
+        return serviceProduto.saveProduto(produto);
+    }
+
+    @Override
+    public Produto updateProduto(Produto produto) {
+        return serviceProduto.updateProduto(produto);
+    }
+
+    @Override
+    public void deleteProduto(Produto produto) {
+        this.serviceProduto.deleteProduto(produto);
+    }
+
+    @Override
+    public List<Produto> getAllProduto() {
+        return serviceProduto.getAllProduto();
+    }
+
+    @Override
+    public List<Produto> findByNameProduto(String name) {
+        return serviceProduto.findByNameProduto(name);
+    }
+
+    @Override
+    public Produto findByIdProduto(Long id) {
+        return serviceProduto.findByIdProduto(id);
+    }
 
 }

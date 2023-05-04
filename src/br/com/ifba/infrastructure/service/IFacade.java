@@ -7,6 +7,7 @@ package br.com.ifba.infrastructure.service;
 
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
+import br.com.ifba.produto.model.Produto;
 import br.com.ifba.usuario.model.Usuario;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public interface IFacade {
     public Material findByIdMaterial(Long id);
     
     
-     // ------------------- Material -------------------------------//
+     // ------------------- Fornecedor -------------------------------//
     
     public abstract Fornecedor saveFornecedor(Fornecedor fornecedor);
     
@@ -55,6 +56,21 @@ public interface IFacade {
     public List<Fornecedor> findByNameFornecedor(String name);
     
     public Fornecedor findByIdFornecedor(Long id);
+    
+    
+     // ------------------- Produto -------------------------------//
+    
+    public abstract Produto saveProduto(Produto produto);
+    
+    public abstract Produto updateProduto(Produto produto);
+    
+    public abstract void deleteProduto(Produto produto);
+    
+    public List<Produto> getAllProduto();
+    
+    public List<Produto> findByNameProduto(String name);
+    
+    public Produto findByIdProduto(Long id);
     
     
 }
