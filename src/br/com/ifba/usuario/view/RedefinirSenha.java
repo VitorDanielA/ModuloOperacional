@@ -79,15 +79,12 @@ public class RedefinirSenha extends javax.swing.JFrame {
         jLabel10.setText("Redefinir senha!");
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        lblUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lblUsuario.setText("Usuário");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Confirmar senha");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Senha");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/person.png"))); // NOI18N
@@ -96,7 +93,7 @@ public class RedefinirSenha extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/lock.png"))); // NOI18N
 
-        btnRedefinir.setBackground(new java.awt.Color(0, 0, 0));
+        btnRedefinir.setBackground(new java.awt.Color(255, 255, 255));
         btnRedefinir.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         btnRedefinir.setText("Redefinir");
         btnRedefinir.setBorder(null);
@@ -108,7 +105,7 @@ public class RedefinirSenha extends javax.swing.JFrame {
             }
         });
 
-        btnvoltar.setBackground(new java.awt.Color(0, 0, 0));
+        btnvoltar.setBackground(new java.awt.Color(255, 255, 255));
         btnvoltar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         btnvoltar.setText("Voltar");
         btnvoltar.setBorder(null);
@@ -187,26 +184,19 @@ public class RedefinirSenha extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel4)
-                        .addGap(40, 40, 40)))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(38, 38, 38))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(28, 28, 28)
                 .addComponent(btnRedefinir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnvoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -45,8 +45,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuUsuario = new javax.swing.JMenu();
         Usuarios = new javax.swing.JMenuItem();
         menuControleEstoque = new javax.swing.JMenu();
+        menuMateriaisemFalta = new javax.swing.JMenuItem();
+        menuEntradaMateriais = new javax.swing.JMenuItem();
         menuGestaoProdutos = new javax.swing.JMenu();
+        menuProdutos = new javax.swing.JMenuItem();
+        menuEntradasdeProdutos = new javax.swing.JMenuItem();
+        menuSaidadeProdutos = new javax.swing.JMenuItem();
         menuGestaoOrdem = new javax.swing.JMenu();
+        menuOrdemdeFabricacao = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
         sair = new javax.swing.JMenuItem();
 
@@ -99,6 +105,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuGestaoMateriais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/materiais.png"))); // NOI18N
         menuGestaoMateriais.setText("Gestão materiais");
         menuGestaoMateriais.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        menuGestaoMateriais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGestaoMateriaisActionPerformed(evt);
+            }
+        });
 
         menuMateriais.setText("Materiais");
         menuMateriais.addActionListener(new java.awt.event.ActionListener() {
@@ -135,16 +146,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuControleEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/estoque.png"))); // NOI18N
         menuControleEstoque.setText("Controle de estoque");
         menuControleEstoque.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+
+        menuMateriaisemFalta.setText("Materiais em falta");
+        menuControleEstoque.add(menuMateriaisemFalta);
+
+        menuEntradaMateriais.setText("Entrada de materiais");
+        menuControleEstoque.add(menuEntradaMateriais);
+
         jMenuBar1.add(menuControleEstoque);
 
         menuGestaoProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/caracteristicas.png"))); // NOI18N
         menuGestaoProdutos.setText("Gestão de produtos");
         menuGestaoProdutos.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+
+        menuProdutos.setText("Produtos");
+        menuGestaoProdutos.add(menuProdutos);
+
+        menuEntradasdeProdutos.setText("Entradas de produtos");
+        menuGestaoProdutos.add(menuEntradasdeProdutos);
+
+        menuSaidadeProdutos.setText("Saídas de produtos");
+        menuGestaoProdutos.add(menuSaidadeProdutos);
+
         jMenuBar1.add(menuGestaoProdutos);
 
         menuGestaoOrdem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/fabricacao.png"))); // NOI18N
         menuGestaoOrdem.setText("Gestão de ordem");
         menuGestaoOrdem.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+
+        menuOrdemdeFabricacao.setText("Ordem de fabricação");
+        menuGestaoOrdem.add(menuOrdemdeFabricacao);
+
         jMenuBar1.add(menuGestaoOrdem);
 
         menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/sair.png"))); // NOI18N
@@ -206,6 +238,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_UsuariosActionPerformed
 
+    private void menuGestaoMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGestaoMateriaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuGestaoMateriaisActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,11 +286,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu menuControleEstoque;
+    private javax.swing.JMenuItem menuEntradaMateriais;
+    private javax.swing.JMenuItem menuEntradasdeProdutos;
     private javax.swing.JMenuItem menuFornecedor;
     private javax.swing.JMenu menuGestaoMateriais;
     private javax.swing.JMenu menuGestaoOrdem;
     private javax.swing.JMenu menuGestaoProdutos;
     private javax.swing.JMenuItem menuMateriais;
+    private javax.swing.JMenuItem menuMateriaisemFalta;
+    private javax.swing.JMenuItem menuOrdemdeFabricacao;
+    private javax.swing.JMenuItem menuProdutos;
+    private javax.swing.JMenuItem menuSaidadeProdutos;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenu menuUsuario;
     private javax.swing.JMenuItem sair;

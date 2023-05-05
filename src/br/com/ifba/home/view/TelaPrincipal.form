@@ -27,6 +27,9 @@
               <Font name="Segoe UI" size="17" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGestaoMateriaisActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuMateriais">
               <Properties>
@@ -77,6 +80,18 @@
               <Font name="Segoe UI" size="17" style="0"/>
             </Property>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuMateriaisemFalta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Materiais em falta"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuEntradaMateriais">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Entrada de materiais"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuGestaoProdutos">
           <Properties>
@@ -88,6 +103,23 @@
               <Font name="Segoe UI" size="17" style="0"/>
             </Property>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuProdutos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Produtos"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuEntradasdeProdutos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Entradas de produtos"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuSaidadeProdutos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sa&#xed;das de produtos"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuGestaoOrdem">
           <Properties>
@@ -99,6 +131,13 @@
               <Font name="Segoe UI" size="17" style="0"/>
             </Property>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuOrdemdeFabricacao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ordem de fabrica&#xe7;&#xe3;o"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuSair">
           <Properties>

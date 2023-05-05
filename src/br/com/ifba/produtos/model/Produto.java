@@ -21,7 +21,7 @@ public class Produto extends PersistenceEntity{
     private String nome;
     private String descricao;
     private String estoque;
-    // materiais (quantidade e valor), ... 
+    // materiais (quantidade e valor)
     private String valorTotal;
 
     public String getCodigo() {
