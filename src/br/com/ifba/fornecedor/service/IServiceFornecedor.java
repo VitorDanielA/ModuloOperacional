@@ -4,7 +4,6 @@
  */
 package br.com.ifba.fornecedor.service;
 import br.com.ifba.fornecedor.model.Fornecedor;
-import br.com.ifba.material.model.Material;
 import java.util.List;
 /**
  *
