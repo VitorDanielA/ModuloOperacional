@@ -12,6 +12,9 @@ import br.com.ifba.fornecedor.service.ServiceFornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.material.service.IServiceMaterial;
 import br.com.ifba.material.service.ServiceMaterial;
+import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
+import br.com.ifba.ordensFabricacao.service.IServiceOrdensFabricacao;
+import br.com.ifba.ordensFabricacao.service.ServiceOrdensFabricacao;
 import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.produto.service.IServiceProduto;
 import br.com.ifba.produto.service.ServiceProduto;
@@ -154,6 +157,39 @@ public class Facade implements IFacade {
     @Override
     public Produto findByIdProduto(Long id) {
         return serviceProduto.findByIdProduto(id);
+    }
+
+     // ------------------- Ordens de Fabricação -------------------------------//
+    
+    private final IServiceOrdensFabricacao serviceOrdensFabricacao = new ServiceOrdensFabricacao();
+    @Override
+    public OrdensFabricacao saveOrdensFabricacao(OrdensFabricacao ordens) {
+        return serviceOrdensFabricacao.saveOrdensFabricacao(ordens);
+    }
+
+    @Override
+    public OrdensFabricacao updateOrdensFabricacao(OrdensFabricacao ordens) {
+        return serviceOrdensFabricacao.updateOrdensFabricacao(ordens);
+    }
+
+    @Override
+    public void deleteOrdensFabricacao(OrdensFabricacao ordens) {
+        this.deleteOrdensFabricacao(ordens);
+    }
+
+    @Override
+    public List<OrdensFabricacao> getAllOrdensFabricacao() {
+        return getAllOrdensFabricacao();
+    }
+
+    @Override
+    public List<OrdensFabricacao> findByNameOrdensFabricacao(String name) {
+        return serviceOrdensFabricacao.findByNameOrdensFabricacao(name);
+    }
+
+    @Override
+    public OrdensFabricacao findByIdOrdensFabricacao(Long id) {
+        return serviceOrdensFabricacao.findByIdOrdensFabricacao(id);
     }
 
 }

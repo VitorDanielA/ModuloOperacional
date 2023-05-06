@@ -7,6 +7,7 @@ package br.com.ifba.infrastructure.service;
 
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
+import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
 import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.usuario.model.Usuario;
 import java.util.List;
@@ -72,5 +73,17 @@ public interface IFacade {
     
     public Produto findByIdProduto(Long id);
     
+    // ------------------- Ordens de Fabricacao -------------------------------//
     
+    public abstract OrdensFabricacao saveOrdensFabricacao(OrdensFabricacao ordens);
+    
+    public abstract OrdensFabricacao updateOrdensFabricacao(OrdensFabricacao ordens);
+
+    public abstract void deleteOrdensFabricacao(OrdensFabricacao ordens);
+    
+    public List<OrdensFabricacao> getAllOrdensFabricacao();
+    
+    public List<OrdensFabricacao> findByNameOrdensFabricacao(String name);
+    
+    public OrdensFabricacao findByIdOrdensFabricacao(Long id);
 }

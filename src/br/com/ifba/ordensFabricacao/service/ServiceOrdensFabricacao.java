@@ -67,7 +67,7 @@ public class ServiceOrdensFabricacao implements IServiceOrdensFabricacao{
     }
 
     @Override
-    public List<OrdensFabricacao> getAllOrdensFabricacao() {
+    public List<OrdensFabricacao> getAllOrdensFabricacao(){
          return daoOrdensFabricacao.findAll();
     }
 

@@ -28,6 +28,7 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
     @OneToOne
     private Produto produtos;
     private int quantidade;
+    private String status;
 
     public Date getData() {
         return data;
@@ -59,6 +60,14 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     
