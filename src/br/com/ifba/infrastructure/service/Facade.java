@@ -5,7 +5,9 @@
  */
 package br.com.ifba.infrastructure.service;
 
-
+import br.com.ifba.entradaMaterial.model.EntradaMaterial;
+import br.com.ifba.entradaMaterial.service.ServiceEntradaMaterial;
+import br.com.ifba.entradaMaterial.service.IServiceEntradaMaterial;
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.fornecedor.service.IServiceFornecedor;
 import br.com.ifba.fornecedor.service.ServiceFornecedor;
@@ -191,5 +193,38 @@ public class Facade implements IFacade {
     public OrdensFabricacao findByIdOrdensFabricacao(Long id) {
         return serviceOrdensFabricacao.findByIdOrdensFabricacao(id);
     }
-
+    
+    // -----------------Entrada de Materiais -------------------//
+    
+    private final IServiceEntradaMaterial serviceEntradaMaterial = new ServiceEntradaMaterial();
+    
+    @Override
+    public EntradaMaterial saveEntradaMaterial(EntradaMaterial entradaMaterial){
+        return serviceEntradaMaterial.saveEntradaMaterial(entradaMaterial);
+    }
+    
+    @Override
+    public EntradaMaterial updateEntradaMaterial(EntradaMaterial entradaMaterial){
+        return serviceEntradaMaterial.updateEntradaMaterial(entradaMaterial);
+    }
+    
+    @Override
+    public void deleteEntradaMaterial(EntradaMaterial entradaMaterial){
+        this.deleteEntradaMaterial(entradaMaterial);
+    }
+    
+    @Override
+    public List<EntradaMaterial> getAllEntradaMaterial(){
+        return getAllEntradaMaterial();
+    }
+    
+    @Override
+    public List<EntradaMaterial> findByNameEntradaMaterial(String name){
+        return serviceEntradaMaterial.findByNameEntradaMaterial(name);
+    }
+    
+    @Override
+    public EntradaMaterial findByIdEntradaMaterial(Long id){
+        return serviceEntradaMaterial.findByIdEntradaMaterial(id);
+    }
 }

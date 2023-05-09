@@ -5,6 +5,7 @@
  */
 package br.com.ifba.infrastructure.service;
 
+import br.com.ifba.entradaMaterial.model.EntradaMaterial;
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
 import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
@@ -86,4 +87,18 @@ public interface IFacade {
     public List<OrdensFabricacao> findByNameOrdensFabricacao(String name);
     
     public OrdensFabricacao findByIdOrdensFabricacao(Long id);
+    
+    // -------------------- Entrada de Materiais --------------------------//
+    
+    public abstract EntradaMaterial saveEntradaMaterial(EntradaMaterial entradaMaterial);
+    
+    public abstract EntradaMaterial updateEntradaMaterial(EntradaMaterial entradaMaterial);
+    
+    public abstract void deleteEntradaMaterial(EntradaMaterial entradaMaterial);
+    
+    public List<EntradaMaterial> getAllEntradaMaterial();
+    
+    public List<EntradaMaterial> findByNameEntradaMaterial(String name);
+    
+    public EntradaMaterial findByIdEntradaMaterial(Long id);
 }
