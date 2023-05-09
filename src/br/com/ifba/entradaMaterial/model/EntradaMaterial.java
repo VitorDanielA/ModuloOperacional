@@ -4,6 +4,7 @@ import br.com.ifba.infrastructure.model.PersistenceEntity;
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,8 +15,10 @@ import javax.persistence.Table;
 @Table
 public class EntradaMaterial extends PersistenceEntity {
     private String data;
+    @OneToOne
     private Material material;
     private String notaFiscal;
+    @OneToOne
     private Fornecedor fornecedor;
 
     public String getData() {
