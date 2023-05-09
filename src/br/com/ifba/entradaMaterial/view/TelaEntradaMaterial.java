@@ -3,7 +3,9 @@ package br.com.ifba.entradaMaterial.view;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.entradaMaterial.model.EntradaMaterial;
 import br.com.ifba.infrastructure.support.StringUtil;
+import br.com.ifba.usuario.view.TelaCadastro;
 import javax.swing.table.DefaultTableModel;
+import br.com.ifba.home.view.TelaPrincipal;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -15,12 +17,41 @@ import java.util.List;
  * @author clebinho
  */
 public class TelaEntradaMaterial extends javax.swing.JFrame {
+    DefaultTableModel listaTabela;
+    List<EntradaMaterial> itemLista = new ArrayList<>();
+    List<EntradaMaterial> listaPesquisa = new ArrayList<>();
+    int selecionado = -1;
 
     /**
      * Creates new form TelaEntradaMaterial
      */
+    EntradaMaterial entradaMaterial;
     public TelaEntradaMaterial() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        atualizarEntradaMaterial(this.itemLista);
+    }
+    
+    private void atualizarEntradaMaterial(List<EntradaMaterial> listaEntradaMaterial){
+        this.listaTabela =  new DefaultTableModel(null, new String [] {"ID", "Data", "Material", "Quantidade", "NF", "Fornecedor"});
+        
+        for(EntradaMaterial entra: listaEntradaMaterial){
+            listaTabela.addRow(new Object[]{entra.getId(), entra.getData(), entra.getMaterial(), entra.getQuantidade(), entra.getNotaFiscal(), entra.getFornecedor()});
+        }
+        
+        this.tblEntradaMaterial.setModel(this.listaTabela);
+    }
+    
+    private boolean validarCampos(EntradaMaterial entrada){
+        StringUtil validacao = StringUtil.getInstance();
+        if(validacao.isEmpty(entrada.getData()) || /*validacao.isEmpty(entrada.getMaterial()) ||*/
+           validacao.isEmpty(entrada.getQuantidade()) || validacao.isEmpty(entrada.getNotaFiscal()) /*||
+           validacao.isEmpty(entrada.getFornecedor())*/)
+        {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -32,22 +63,330 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblModulo = new javax.swing.JLabel();
+        lblOperacional = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEntradaMaterial = new javax.swing.JTable();
+        lblPesquisar = new javax.swing.JLabel();
+        txtPesquisar = new javax.swing.JTextField();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        lblData = new javax.swing.JLabel();
+        lblMaterial = new javax.swing.JLabel();
+        lblQuantidade = new javax.swing.JLabel();
+        lblNotaFiscal = new javax.swing.JLabel();
+        lblFornecedor = new javax.swing.JLabel();
+        txtData = new javax.swing.JTextField();
+        txtMaterial = new javax.swing.JTextField();
+        txtQtdMaterial = new javax.swing.JTextField();
+        txtNotaFiscal = new javax.swing.JTextField();
+        txtFornecedor = new javax.swing.JTextField();
+        lblHome = new javax.swing.JLabel();
+        lblSair = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(50, 194, 185));
+
+        lblTitulo.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
+        lblTitulo.setText("Entrada de Materiais");
+
+        lblModulo.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblModulo.setText("Módulo");
+
+        lblOperacional.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblOperacional.setText("Operacional");
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/modulo.png"))); // NOI18N
+
+        tblEntradaMaterial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Data", "Material", "Quantidade", "NF", "Fornecedor"
+            }
+        ));
+        tblEntradaMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEntradaMaterialMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblEntradaMaterial);
+
+        lblPesquisar.setText("Pesquisar");
+
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyReleased(evt);
+            }
+        });
+
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/edit-java.png"))); // NOI18N
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/delete-java.png"))); // NOI18N
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/add-java.png"))); // NOI18N
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        lblData.setText("Data");
+
+        lblMaterial.setText("Material");
+
+        lblQuantidade.setText("Quantidade");
+
+        lblNotaFiscal.setText("NF");
+
+        lblFornecedor.setText("Fornecedor");
+
+        lblHome.setText("HOME");
+        lblHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHomeMouseClicked(evt);
+            }
+        });
+
+        lblSair.setText("SAIR");
+        lblSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSairMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblPesquisar)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblLogo)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblOperacional))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(lblModulo)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMaterial)
+                            .addComponent(lblData)
+                            .addComponent(lblQuantidade)
+                            .addComponent(lblNotaFiscal)
+                            .addComponent(lblFornecedor)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(txtNotaFiscal, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtQtdMaterial, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtMaterial, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtData, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(119, 119, 119))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(194, 194, 194))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblHome)
+                        .addGap(91, 91, 91)
+                        .addComponent(lblSair)
+                        .addGap(31, 31, 31))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHome)
+                    .addComponent(lblSair))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblModulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblOperacional))
+                    .addComponent(lblLogo))
+                .addGap(18, 18, 18)
+                .addComponent(lblTitulo)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPesquisar)
+                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblData)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMaterial)
+                            .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblQuantidade)
+                            .addComponent(txtQtdMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNotaFiscal)
+                            .addComponent(txtNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFornecedor)
+                            .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // TODO add your handling code here:
+        EntradaMaterial entradaMaterial = new EntradaMaterial();
+        entradaMaterial.setData(txtData.getText());
+       // entradaMaterial.setMaterial(txtMaterial.getText());
+        entradaMaterial.setQuantidade(txtQtdMaterial.getText());
+        entradaMaterial.setNotaFiscal(txtNotaFiscal.getText());
+       // entradaMaterial.setFornecedor(txtFornecedor.getText());
+        
+        if(validarCampos(entradaMaterial) == true){
+            FacadeInstance.getInstance().saveEntradaMaterial(entradaMaterial);
+            JOptionPane.showMessageDialog(null, "Entrada de Material Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
+            
+            this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        
+            this.atualizarEntradaMaterial(this.itemLista);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        entradaMaterial.setData(txtData.getText());
+        //entradaMaterial.setMaterial(txtMaterial.getText());
+        entradaMaterial.setQuantidade(txtQtdMaterial.getText());
+        entradaMaterial.setNotaFiscal(txtNotaFiscal.getText());
+        //entradaMaterial.setFornecedor(txtFornecedor.getText());
+
+        FacadeInstance.getInstance().updateEntradaMaterial(entradaMaterial);
+        
+        this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        
+        this.atualizarEntradaMaterial(this.itemLista);
+        
+        JOptionPane.showMessageDialog(null, "Entrada de material editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        FacadeInstance.getInstance().deleteEntradaMaterial(entradaMaterial);
+        this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        this.atualizarEntradaMaterial(this.itemLista);
+        this.selecionado = -1;
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        TelaPrincipal principal = new TelaPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_lblHomeMouseClicked
+
+    private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        TelaCadastro cadastro = new TelaCadastro(); 
+        cadastro.setVisible(true);
+    }//GEN-LAST:event_lblSairMouseClicked
+
+    private void tblEntradaMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradaMaterialMouseClicked
+        // TODO add your handling code here:
+        this.selecionado = this.tblEntradaMaterial.getSelectedRow();
+        
+        if(this.selecionado >= 0){
+            this.entradaMaterial = this.itemLista.get(this.selecionado);
+        }
+    }//GEN-LAST:event_tblEntradaMaterialMouseClicked
+
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+        // TODO add your handling code here:
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   checaLista();
+                }
+            }
+        });
+    }//GEN-LAST:event_txtPesquisarKeyReleased
+
+    public void checaLista(){
+        listaPesquisa.clear();
+        String pesq = txtPesquisar.getText();
+        this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        int i = 0;
+        for(; this.itemLista.size() > i; i++){
+            if(pesq.equals(itemLista.get(i).getNotaFiscal())){
+              listaPesquisa.add(itemLista.get(i));
+            }
+        }
+        this.atualizarEntradaMaterial(listaPesquisa);
+    }
     /**
      * @param args the command line arguments
      */
@@ -84,5 +423,29 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblFornecedor;
+    private javax.swing.JLabel lblHome;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMaterial;
+    private javax.swing.JLabel lblModulo;
+    private javax.swing.JLabel lblNotaFiscal;
+    private javax.swing.JLabel lblOperacional;
+    private javax.swing.JLabel lblPesquisar;
+    private javax.swing.JLabel lblQuantidade;
+    private javax.swing.JLabel lblSair;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tblEntradaMaterial;
+    private javax.swing.JTextField txtData;
+    private javax.swing.JTextField txtFornecedor;
+    private javax.swing.JTextField txtMaterial;
+    private javax.swing.JTextField txtNotaFiscal;
+    private javax.swing.JTextField txtPesquisar;
+    private javax.swing.JTextField txtQtdMaterial;
     // End of variables declaration//GEN-END:variables
 }

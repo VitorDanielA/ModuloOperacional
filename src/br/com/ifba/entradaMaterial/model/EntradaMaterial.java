@@ -17,6 +17,7 @@ public class EntradaMaterial extends PersistenceEntity {
     private String data;
     @OneToOne
     private Material material;
+    private String quantidade;
     private String notaFiscal;
     @OneToOne
     private Fornecedor fornecedor;
@@ -37,6 +38,14 @@ public class EntradaMaterial extends PersistenceEntity {
         this.material = material;
     }
 
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+    
     public String getNotaFiscal() {
         return notaFiscal;
     }
