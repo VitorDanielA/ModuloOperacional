@@ -7,6 +7,7 @@ package br.com.ifba.home.view;
 
 import br.com.ifba.fornecedor.view.TelaFornecedor;
 import br.com.ifba.material.view.TelaMaterial;
+import br.com.ifba.produtos.view.TelaProduto;
 import br.com.ifba.usuario.view.TelaCadastro;
 import br.com.ifba.usuario.view.TelaUsuario;
 
@@ -160,6 +161,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuGestaoProdutos.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         menuProdutos.setText("Produtos");
+        menuProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutosActionPerformed(evt);
+            }
+        });
         menuGestaoProdutos.add(menuProdutos);
 
         menuEntradasdeProdutos.setText("Entradas de produtos");
@@ -241,6 +247,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menuGestaoMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGestaoMateriaisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuGestaoMateriaisActionPerformed
+
+    private void menuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutosActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        TelaProduto produto = new TelaProduto();
+        produto.setVisible(true);
+    }//GEN-LAST:event_menuProdutosActionPerformed
 
     /**
      * @param args the command line arguments

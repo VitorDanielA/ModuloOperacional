@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ifba.produto.dao;
+package br.com.ifba.produtos.dao;
 
 import br.com.ifba.infrastructure.basedao.IBaseDao;
 import br.com.ifba.produtos.model.Produto;

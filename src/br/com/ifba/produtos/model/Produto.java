@@ -6,7 +6,9 @@
 package br.com.ifba.produtos.model;
 
 import br.com.ifba.infrastructure.model.PersistenceEntity;
+import br.com.ifba.material.model.Material;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +23,9 @@ public class Produto extends PersistenceEntity{
     private String nome;
     private String descricao;
     private String estoque;
-    // materiais (quantidade e valor)
+    private String quantidade;
+    private String valor;
+    
     private String valorTotal;
 
     public String getCodigo() {
@@ -63,8 +67,26 @@ public class Produto extends PersistenceEntity{
     public void setValorTotal(String valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+   
     
-           
+        
     
     
     

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ifba.produto.service;
+package br.com.ifba.produtos.service;
 
+import br.com.ifba.produtos.service.IServiceProduto;
 import br.com.ifba.infrastructure.exception.BusinessException;
-import br.com.ifba.produto.dao.DaoProduto;
-import br.com.ifba.produto.dao.IDaoProduto;
+import br.com.ifba.produtos.dao.DaoProduto;
+import br.com.ifba.produtos.dao.IDaoProduto;
 import br.com.ifba.produtos.model.Produto;
 import java.util.List;
 
