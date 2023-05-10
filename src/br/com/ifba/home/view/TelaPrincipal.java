@@ -5,6 +5,7 @@
  */
 package br.com.ifba.home.view;
 
+import br.com.ifba.entradaMaterial.view.TelaEntradaMaterial;
 import br.com.ifba.fornecedor.view.TelaFornecedor;
 import br.com.ifba.material.view.TelaMaterial;
 import br.com.ifba.produtos.view.TelaProduto;
@@ -153,6 +154,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuControleEstoque.add(menuMateriaisemFalta);
 
         menuEntradaMateriais.setText("Entrada de materiais");
+        menuEntradaMateriais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEntradaMateriaisActionPerformed(evt);
+            }
+        });
         menuControleEstoque.add(menuEntradaMateriais);
 
         jMenuBar1.add(menuControleEstoque);
@@ -271,10 +277,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGestaoOrdemActionPerformed
 
     private void menuOrdemdeFabricacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOrdemdeFabricacaoActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
         TelaOrdensFabricacao OrdensFabricacao = new TelaOrdensFabricacao();
         OrdensFabricacao.setVisible(true);
     }//GEN-LAST:event_menuOrdemdeFabricacaoActionPerformed
+
+    private void menuEntradaMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntradaMateriaisActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        TelaEntradaMaterial entradaMaterial = new TelaEntradaMaterial();
+        entradaMaterial.setVisible(true);
+    }//GEN-LAST:event_menuEntradaMateriaisActionPerformed
 
     /**
      * @param args the command line arguments

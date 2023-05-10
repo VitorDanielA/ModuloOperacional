@@ -44,10 +44,12 @@ public class TelaProduto extends javax.swing.JFrame {
     }
     
     private void atualizarProduto(List<Produto> listaProduto){
-        this.listaTabela =  new DefaultTableModel(null, new String [] {"Código", "Nome", "Descrição", "Estoque", "Qtd Materiais", "Valor Materiais"});
+        double valorTotal;
+        this.listaTabela =  new DefaultTableModel(null, new String [] {"Código", "Nome", "Descrição", "Estoque", "Valor Total"});
         
         for(Produto pd: listaProduto){
-            listaTabela.addRow(new Object[]{pd.getCodigo(), pd.getNome(), pd.getDescricao(), pd.getEstoque(), pd.getQuantidade(), pd.getValor()});
+            valorTotal = Integer.parseInt(pd.getQuantidade()) * Integer.parseInt(pd.getValor());
+            listaTabela.addRow(new Object[]{pd.getCodigo(), pd.getNome(), pd.getDescricao(), pd.getEstoque(), valorTotal });
         }
         
         this.tblProdutos.setModel(this.listaTabela);
@@ -348,7 +350,7 @@ public class TelaProduto extends javax.swing.JFrame {
         produto.setEstoque(txtEstoque.getText());
         produto.setQuantidade(txtQtdMateriais.getText());
         produto.setValor(txtValorMateriais.getText());
-        
+       
         if(validarCampos(produto) == true){
             FacadeInstance.getInstance().saveProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto Cadastrado", "Parabéns", JOptionPane.WARNING_MESSAGE);
