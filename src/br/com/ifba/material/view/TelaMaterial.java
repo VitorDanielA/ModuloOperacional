@@ -413,6 +413,15 @@ public class TelaMaterial extends javax.swing.JFrame {
         if(this.selecionado >= 0){
             this.material = this.itemLista.get(this.selecionado);
         }
+        
+        if(this.material != null){
+            txtNome.setText(this.material.getNome());
+            txtCodigo.setText(this.material.getCodigo());
+            txtValor.setText(this.material.getValor());
+            txtDescricao.setText(this.material.getDescricao());
+            txtEstoqueAtual.setText(this.material.getEstoqueAtual());
+            txtEstoqueMinimo.setText(this.material.getEstoqueMinimo());
+        }
     }//GEN-LAST:event_tblTabelaMouseClicked
 
     private void txtEstoqueAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstoqueAtualActionPerformed

@@ -458,6 +458,15 @@ public class TelaFornecedor extends javax.swing.JFrame {
         if(this.selecionado >= 0){
             this.fornecedor = this.itemLista.get(this.selecionado);
         }
+        
+        if(this.fornecedor != null){
+            txtNome.setText(this.fornecedor.getNome());
+            txtEndereco.setText(this.fornecedor.getEndereco());
+            txtEmail.setText(this.fornecedor.getEmail());
+            txtCNPJ.setText(this.fornecedor.getCnpj());
+            txtTelefone.setText(this.fornecedor.getTelefone());
+            txtRazaoSocial.setText(this.fornecedor.getRazaoSocial());
+        }
     }//GEN-LAST:event_tblTabelaMouseClicked
 
     private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
