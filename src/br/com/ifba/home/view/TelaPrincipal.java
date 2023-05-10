@@ -10,6 +10,7 @@ import br.com.ifba.material.view.TelaMaterial;
 import br.com.ifba.produtos.view.TelaProduto;
 import br.com.ifba.usuario.view.TelaCadastro;
 import br.com.ifba.usuario.view.TelaUsuario;
+import br.com.ifba.ordensFabricacao.view.TelaOrdensFabricacao;
 
 /**
  *
@@ -179,8 +180,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuGestaoOrdem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/fabricacao.png"))); // NOI18N
         menuGestaoOrdem.setText("Gestão de ordem");
         menuGestaoOrdem.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        menuGestaoOrdem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGestaoOrdemActionPerformed(evt);
+            }
+        });
 
         menuOrdemdeFabricacao.setText("Ordem de fabricação");
+        menuOrdemdeFabricacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuOrdemdeFabricacaoActionPerformed(evt);
+            }
+        });
         menuGestaoOrdem.add(menuOrdemdeFabricacao);
 
         jMenuBar1.add(menuGestaoOrdem);
@@ -254,6 +265,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaProduto produto = new TelaProduto();
         produto.setVisible(true);
     }//GEN-LAST:event_menuProdutosActionPerformed
+
+    private void menuGestaoOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGestaoOrdemActionPerformed
+       
+    }//GEN-LAST:event_menuGestaoOrdemActionPerformed
+
+    private void menuOrdemdeFabricacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOrdemdeFabricacaoActionPerformed
+         this.setVisible(false);
+        TelaOrdensFabricacao OrdensFabricacao = new TelaOrdensFabricacao();
+        OrdensFabricacao.setVisible(true);
+    }//GEN-LAST:event_menuOrdemdeFabricacaoActionPerformed
 
     /**
      * @param args the command line arguments
