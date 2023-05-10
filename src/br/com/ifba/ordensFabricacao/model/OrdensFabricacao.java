@@ -5,15 +5,9 @@
 package br.com.ifba.ordensFabricacao.model;
 
 import br.com.ifba.infrastructure.model.PersistenceEntity;
-import br.com.ifba.produtos.model.Produto;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 /**
  *
