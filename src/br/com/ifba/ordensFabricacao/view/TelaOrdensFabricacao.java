@@ -45,7 +45,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         this.listaTabela =  new DefaultTableModel(null, new String [] {"Data", "Produto", "Quantidade", "Status"});
         
         for(OrdensFabricacao ordens: listaOrdem){
-            listaTabela.addRow(new Object[]{ordens.getData(), ordens.getProduto(), ordens.getQuantidade(), ordens.getStatus()});
+            listaTabela.addRow(new Object[]{ordens.getData(), ordens.getProdutos(), ordens.getQuantidade(), ordens.getStatus()});
         }
         
         this.tblTabela.setModel(this.listaTabela);
@@ -54,7 +54,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     private boolean validarCampos(OrdensFabricacao ordens){
         StringUtil validacao = StringUtil.getInstance();
         if(validacao.isEmpty(ordens.getCodigo()) || validacao.isEmpty(ordens.getData())||
-           validacao.isEmpty(ordens.getProduto())||validacao.isEmpty(ordens.getStatus()))
+           validacao.isEmpty(ordens.getProdutos())||validacao.isEmpty(ordens.getStatus()))
            {
             return false;
         }
@@ -395,7 +395,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         ordens.setStatus(cbStatus.getSelectedItem().toString());
         ordens.setQuantidade((int) Squantidade.getValue());
         ordens.setData(txtData.getText());
-        ordens.setProduto(txtProduto.getText());
+        ordens.setProdutos(txtProduto.getText());
 
         FacadeInstance.getInstance().updateOrdensFabricacao(ordens);
 
@@ -424,7 +424,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         ordens.setStatus(cbStatus.getSelectedItem().toString());
         ordens.setQuantidade((int) Squantidade.getValue());
         ordens.setData(txtData.getText());
-        ordens.setProduto(txtProduto.getText());
+        ordens.setProdutos(txtProduto.getText());
         
         if(validarCampos(ordens) == true){
             FacadeInstance.getInstance().saveOrdensFabricacao(ordens);
