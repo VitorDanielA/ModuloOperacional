@@ -22,19 +22,18 @@ import javax.persistence.Temporal;
 @Entity
 @Table
 public class OrdensFabricacao extends PersistenceEntity implements Serializable {
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date data;
+    
+    private String data;
     private String codigo;
-    @OneToOne
-    private Produto produtos;
+    private String produtos;
     private int quantidade;
     private String status;
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -46,14 +45,14 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
         this.codigo = codigo;
     }
 
-    public Produto getProdutos() {
+    public String getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Produto produtos) {
+    public void setProdutos(String produtos) {
         this.produtos = produtos;
     }
-    
+
     public int getQuantidade() {
         return quantidade;
     }
@@ -69,6 +68,8 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    
 
     
 }
