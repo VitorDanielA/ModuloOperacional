@@ -10,6 +10,7 @@ import br.com.ifba.infrastructure.support.StringUtil;
 import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
 import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.usuario.view.TelaCadastro;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -29,16 +30,27 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     MaskFormatter mfData;
     DefaultTableModel listaTabela;
     List<OrdensFabricacao> itemOrdem; 
+    List<OrdensFabricacao> listaPesquisa; 
+    List<Produto> produtos;
+    int selecionado = -1;
     
+    OrdensFabricacao ordens;
     public TelaOrdensFabricacao() {
-        initComponents();
-        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
-        atualizarOrdem(this.itemOrdem);
-    
+       
      try {
             mfData = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
             System.out.println("Erro na criação da máscara.(Cheque o construtor o problema é na data.)");
+        }
+    
+          initComponents();
+        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
+        this.produtos = FacadeInstance.getInstance().getAllProduto();
+        atualizarOrdem(this.itemOrdem);
+        this.cbProduto.removeAllItems();
+        
+        for(Produto prod: produtos){
+            this.cbProduto.addItem(prod.getNome());
         }
     }
     
@@ -81,7 +93,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtPesquisar = new javax.swing.JTextField();
+        txtPesquisa = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         txtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -149,13 +161,18 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                 "Data", "Produto", "Quantidade", "Status"
             }
         ));
+        tblTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTabela);
 
-        jLabel1.setText("Pesquisar:");
+        jLabel1.setText("Pesquisar por código:");
 
-        txtPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisarActionPerformed(evt);
+                txtPesquisaActionPerformed(evt);
             }
         });
 
@@ -198,6 +215,18 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
             }
         });
 
+        jfData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jfDataActionPerformed(evt);
+            }
+        });
+
+        cbProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProdutoActionPerformed(evt);
+            }
+        });
+
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pendente", "em produção ", "concluída" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -208,20 +237,22 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(26, 26, 26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCodigo)
+                                    .addComponent(cbProduto, 0, 105, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
@@ -295,13 +326,13 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +352,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -340,10 +371,10 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -363,40 +394,38 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         cadastro.setVisible(true);
     }//GEN-LAST:event_lblSairMouseClicked
 
-    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarActionPerformed
+    }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        ordens.setCodigo(txtCodigo.getText());
+        ordens.setProdutos((Produto) cbProduto.getSelectedItem());
+        ordens.setStatus(cbStatus.getSelectedItem().toString());
+        ordens.setQuantidade((int) Squantidade.getValue());
+        ordens.setData((Date) jfData.getValue());
+        
+        FacadeInstance.getInstance().updateOrdensFabricacao(ordens);
 
-      /*fornecedor.setNome(txtNome.getText());
-        fornecedor.setEmail(txtEmail.getText());
-        fornecedor.setTelefone(txtTelefone.getText());
-        fornecedor.setCnpj(txtCNPJ.getText());
-        fornecedor.setEndereco(txtEndereco.getText());
-        fornecedor.setRazaoSocial(txtRazaoSocial.getText());
+        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
 
-        FacadeInstance.getInstance().updateFornecedor(fornecedor);
+        this.atualizarOrdem(this.itemOrdem);
 
-        this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
+        JOptionPane.showMessageDialog(null, "Ordens de fabricação Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
 
-        this.atualizarFornecedor(this.itemLista);
-
-        JOptionPane.showMessageDialog(null, "Fornecedor Editado com sucesso", "Parabéns", JOptionPane.WARNING_MESSAGE);
-*/
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-       /* FacadeInstance.getInstance().deleteFornecedor(fornecedor);
-        this.itemLista = FacadeInstance.getInstance().getAllFornecedor();
-        this.atualizarFornecedor(this.itemLista);
+        FacadeInstance.getInstance().deleteOrdensFabricacao(ordens);
+        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
+        this.atualizarOrdem(this.itemOrdem);
         this.selecionado = -1;
-        */
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -417,6 +446,50 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void jfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jfDataActionPerformed
+
+    private void tblTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTabelaMouseClicked
+         this.selecionado = this.tblTabela.getSelectedRow();
+        
+        if(this.selecionado >= 0){
+            this.ordens = this.itemOrdem.get(this.selecionado);
+        }
+    }//GEN-LAST:event_tblTabelaMouseClicked
+
+    private void cbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbProdutoActionPerformed
+ private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {                                        
+        
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   checaLista();
+                }
+            }
+        });
+    }
+     public void checaLista(){
+         
+        listaPesquisa.clear();
+        String pesq = txtPesquisa.getText();
+        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
+        int i = 0;
+        
+        for(; this.itemOrdem.size() > i; i++){
+            
+            if(pesq.equals(itemOrdem.get(i).getCodigo())){
+        
+                listaPesquisa.add(itemOrdem.get(i));
+               
+            }
+        }
+        this.atualizarOrdem(listaPesquisa);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -478,6 +551,6 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     private javax.swing.JLabel lblSair;
     private javax.swing.JTable tblTabela;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtPesquisar;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }
