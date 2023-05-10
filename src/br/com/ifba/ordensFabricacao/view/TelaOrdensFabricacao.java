@@ -5,10 +5,16 @@
 package br.com.ifba.ordensFabricacao.view;
 
 import br.com.ifba.home.view.TelaPrincipal;
+import br.com.ifba.infrastructure.service.FacadeInstance;
+import br.com.ifba.infrastructure.support.StringUtil;
+import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
+import br.com.ifba.produtos.model.Produto;
 import br.com.ifba.usuario.view.TelaCadastro;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -21,15 +27,38 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
      * Creates new form TelaOrdensFabricacao
      */
     MaskFormatter mfData;
+    DefaultTableModel listaTabela;
+    List<OrdensFabricacao> itemOrdem; 
+    
     public TelaOrdensFabricacao() {
-        
-        try {
+        initComponents();
+        this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();
+        atualizarOrdem(this.itemOrdem);
+    
+     try {
             mfData = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
             System.out.println("Erro na criação da máscara.(Cheque o construtor o problema é na data.)");
         }
+    }
+    
+    private void atualizarOrdem(List<OrdensFabricacao> listaOrdem){
+        this.listaTabela =  new DefaultTableModel(null, new String [] {"Data", "Produto", "Quantidade", "Status"});
         
-        initComponents();
+        for(OrdensFabricacao ordens: listaOrdem){
+            listaTabela.addRow(new Object[]{ordens.getData(), ordens.getProdutos(), ordens.getQuantidade(), ordens.getStatus()});
+        }
+        
+        this.tblTabela.setModel(this.listaTabela);
+    }
+      
+    private boolean validarCampos(OrdensFabricacao ordens){
+        StringUtil validacao = StringUtil.getInstance();
+        if(validacao.isEmpty(ordens.getCodigo()) || validacao.isEmpty(ordens.getData().toString()))
+           {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -60,13 +89,13 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Quantidade = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         jfData = new javax.swing.JFormattedTextField(mfData);
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbProduto = new javax.swing.JComboBox<>();
+        cbStatus = new javax.swing.JComboBox<>();
+        Squantidade = new javax.swing.JSpinner();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,12 +177,6 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
 
         jLabel10.setText("Quantidade");
 
-        Quantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuantidadeActionPerformed(evt);
-            }
-        });
-
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/images/edit-java.png"))); // NOI18N
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +198,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pendente", "em produção ", "concluída" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pendente", "em produção ", "concluída" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -193,17 +216,17 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cbProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Squantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,13 +251,13 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Squantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,15 +333,17 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -345,10 +370,6 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void QuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_QuantidadeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
@@ -379,7 +400,21 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+       
+        OrdensFabricacao ordens = new OrdensFabricacao();
+        ordens.setCodigo(txtCodigo.getText());
+        ordens.setProdutos((Produto) cbProduto.getSelectedItem());
+        ordens.setStatus(cbStatus.getSelectedItem().toString());
+        ordens.setQuantidade((int) Squantidade.getValue());
+        ordens.setData((Date) jfData.getValue());
         
+        if(validarCampos(ordens) == true){
+            FacadeInstance.getInstance().saveOrdensFabricacao(ordens);
+            JOptionPane.showMessageDialog(null, "Ordem de fabricação Cadastrada", "Parabéns", JOptionPane.WARNING_MESSAGE);
+
+             this.itemOrdem = FacadeInstance.getInstance().getAllOrdensFabricacao();       
+                this.atualizarOrdem(this.itemOrdem);
+        }   
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -418,12 +453,12 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Quantidade;
+    private javax.swing.JSpinner Squantidade;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cbProduto;
+    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
