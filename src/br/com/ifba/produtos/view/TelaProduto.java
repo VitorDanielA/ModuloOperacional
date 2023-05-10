@@ -324,7 +324,7 @@ public class TelaProduto extends javax.swing.JFrame {
                                     .addComponent(lblEstoque)
                                     .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir)
                     .addComponent(btnAdd))
@@ -437,7 +437,7 @@ public class TelaProduto extends javax.swing.JFrame {
                 this.produtos = this.facade.findByNameProduto(nome);
             } catch (Exception error) {
                 JOptionPane.showMessageDialog(null, error,
-                        "Erro ao buscar usuários!", JOptionPane.ERROR_MESSAGE);
+                        "Erro ao buscar produtos!", JOptionPane.ERROR_MESSAGE);
             }
         }
         
