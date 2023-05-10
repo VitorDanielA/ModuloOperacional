@@ -176,12 +176,12 @@ public class Facade implements IFacade {
 
     @Override
     public void deleteOrdensFabricacao(OrdensFabricacao ordens) {
-        this.deleteOrdensFabricacao(ordens);
+        this.serviceOrdensFabricacao.deleteOrdensFabricacao(ordens);
     }
 
     @Override
     public List<OrdensFabricacao> getAllOrdensFabricacao() {
-        return getAllOrdensFabricacao();
+        return serviceOrdensFabricacao.getAllOrdensFabricacao();
     }
 
     @Override
