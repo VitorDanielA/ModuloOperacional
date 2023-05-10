@@ -210,12 +210,12 @@ public class Facade implements IFacade {
     
     @Override
     public void deleteEntradaMaterial(EntradaMaterial entradaMaterial){
-        this.deleteEntradaMaterial(entradaMaterial);
+        this.serviceEntradaMaterial.deleteEntradaMaterial(entradaMaterial);
     }
     
     @Override
     public List<EntradaMaterial> getAllEntradaMaterial(){
-        return getAllEntradaMaterial();
+        return serviceEntradaMaterial.getAllEntradaMaterial();
     }
     
     @Override
