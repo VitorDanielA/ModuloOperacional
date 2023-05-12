@@ -5,9 +5,12 @@
 package br.com.ifba.ordensFabricacao.model;
 
 import br.com.ifba.infrastructure.model.PersistenceEntity;
+import br.com.ifba.produtos.model.Produto;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -17,17 +20,18 @@ import javax.persistence.Table;
 @Table
 public class OrdensFabricacao extends PersistenceEntity implements Serializable {
     
-    private String data;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date data;
     private String codigo;
-    private String produtos;
+    private Produto produto;
     private int quantidade;
     private String status;
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -39,12 +43,12 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
         this.codigo = codigo;
     }
 
-    public String getProdutos() {
-        return produtos;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setProdutos(String produtos) {
-        this.produtos = produtos;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public int getQuantidade() {
@@ -62,8 +66,7 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
 
+    
     
 }

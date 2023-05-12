@@ -10,14 +10,16 @@ import br.com.ifba.infrastructure.support.StringUtil;
 import br.com.ifba.ordensFabricacao.model.OrdensFabricacao;
 import br.com.ifba.usuario.view.TelaCadastro;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author user
+ * @author Everton
  */
 public class TelaOrdensFabricacao extends javax.swing.JFrame {
 
@@ -45,7 +47,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         this.listaTabela =  new DefaultTableModel(null, new String [] {"Data", "Produto", "Quantidade", "Status"});
         
         for(OrdensFabricacao ordens: listaOrdem){
-            listaTabela.addRow(new Object[]{ordens.getData(), ordens.getProdutos(), ordens.getQuantidade(), ordens.getStatus()});
+            listaTabela.addRow(new Object[]{ordens.getData(), ordens.getQuantidade(), ordens.getStatus()});
         }
         
         this.tblTabela.setModel(this.listaTabela);
@@ -53,8 +55,8 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
       
     private boolean validarCampos(OrdensFabricacao ordens){
         StringUtil validacao = StringUtil.getInstance();
-        if(validacao.isEmpty(ordens.getCodigo()) || validacao.isEmpty(ordens.getData())||
-           validacao.isEmpty(ordens.getProdutos())||validacao.isEmpty(ordens.getStatus()))
+        if(validacao.isEmpty(ordens.getCodigo()) || validacao.isEmpty(ordens.getData().toString())||
+           validacao.isEmpty(ordens.getProduto().toString())||validacao.isEmpty(ordens.getStatus()))
            {
             return false;
         }
@@ -94,8 +96,8 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         cbStatus = new javax.swing.JComboBox<>();
         Squantidade = new javax.swing.JSpinner();
-        txtProduto = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        txtDataCalendar = new com.toedter.calendar.JDateChooser();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,12 +212,6 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
 
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pendente", "em produção ", "concluída" }));
 
-        txtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -238,18 +234,18 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                    .addComponent(txtProduto))))
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Squantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Squantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31))
+                                .addComponent(txtDataCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(113, 113, 113))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
@@ -261,19 +257,20 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtDataCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Squantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -319,7 +316,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +333,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -394,8 +391,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         ordens.setCodigo(txtCodigo.getText());
         ordens.setStatus(cbStatus.getSelectedItem().toString());
         ordens.setQuantidade((int) Squantidade.getValue());
-        ordens.setData(txtData.getText());
-        ordens.setProdutos(txtProduto.getText());
+        ordens.setData(txtDataCalendar.getDate());
 
         FacadeInstance.getInstance().updateOrdensFabricacao(ordens);
 
@@ -423,8 +419,10 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
         ordens.setCodigo(txtCodigo.getText());
         ordens.setStatus(cbStatus.getSelectedItem().toString());
         ordens.setQuantidade((int) Squantidade.getValue());
-        ordens.setData(txtData.getText());
-        ordens.setProdutos(txtProduto.getText());
+        //Date data1 = txtDataCalendar.getDate();
+        //SimpleDateFormat formatador = new SimpleDateFormat("yyy-MM-DD");
+        ordens.setData(txtDataCalendar.getDate());
+        
         
         if(validarCampos(ordens) == true){
             FacadeInstance.getInstance().saveOrdensFabricacao(ordens);
@@ -442,10 +440,6 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
             this.ordens = this.itemOrdem.get(this.selecionado);
         }
     }//GEN-LAST:event_tblTabelaMouseClicked
-
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataActionPerformed
 
     private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
         txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -515,6 +509,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> cbStatus;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -533,8 +528,7 @@ public class TelaOrdensFabricacao extends javax.swing.JFrame {
     private javax.swing.JLabel lblSair;
     private javax.swing.JTable tblTabela;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtData;
+    private com.toedter.calendar.JDateChooser txtDataCalendar;
     private javax.swing.JTextField txtPesquisa;
-    private javax.swing.JTextField txtProduto;
     // End of variables declaration//GEN-END:variables
 }
