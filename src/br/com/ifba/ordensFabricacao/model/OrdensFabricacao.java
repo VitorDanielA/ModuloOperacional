@@ -9,6 +9,7 @@ import br.com.ifba.produtos.model.Produto;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -23,6 +24,7 @@ public class OrdensFabricacao extends PersistenceEntity implements Serializable 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
     private String codigo;
+    @ManyToOne
     private Produto produto;
     private int quantidade;
     private String status;

@@ -84,6 +84,11 @@ public class Produto extends PersistenceEntity{
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
    
     
         
