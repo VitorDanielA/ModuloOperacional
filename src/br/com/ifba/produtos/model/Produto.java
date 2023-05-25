@@ -7,7 +7,9 @@ package br.com.ifba.produtos.model;
 
 import br.com.ifba.infrastructure.model.PersistenceEntity;
 import br.com.ifba.material.model.Material;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,10 +25,12 @@ public class Produto extends PersistenceEntity{
     private String nome;
     private String descricao;
     private String estoque;
-    private String quantidade;
-    private String valor;
     
-    private String valorTotal;
+    @ManyToOne
+    private Material material;
+    private int quantidade;
+    
+    //private float valorTotal;
 
     public String getCodigo() {
         return codigo;
@@ -44,6 +48,14 @@ public class Produto extends PersistenceEntity{
         this.nome = nome;
     }
 
+//    public float getValorTotal() {
+//        return valorTotal;
+//    }
+//
+//    public void setValorTotal(float valorTotal) {
+//        this.valorTotal = valorTotal;
+//    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -60,34 +72,28 @@ public class Produto extends PersistenceEntity{
         this.estoque = estoque;
     }
 
-    public String getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(String valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public String getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
     }
 
     @Override
     public String toString() {
         return nome;
     }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+   
 
    
     

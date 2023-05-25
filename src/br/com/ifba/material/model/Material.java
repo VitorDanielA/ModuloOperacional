@@ -72,5 +72,10 @@ public class Material extends PersistenceEntity{
     public void setEstoqueMinimo(String estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
     
 }
