@@ -35,7 +35,7 @@ public class TelaProduto extends javax.swing.JFrame {
        Produto produto;
        private ComboboxProduto comboboxProduto;
 
-      
+      //teste
        private IFacade facade;
     /**
      * Creates new form TelaProduto
