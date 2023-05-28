@@ -7,6 +7,7 @@ package br.com.ifba.home.view;
 
 import br.com.ifba.entradaMaterial.view.TelaEntradaMaterial;
 import br.com.ifba.fornecedor.view.TelaFornecedor;
+import br.com.ifba.material.view.TelaGrafico;
 import br.com.ifba.material.view.TelaMaterial;
 import br.com.ifba.produtos.view.TelaProduto;
 import br.com.ifba.usuario.view.TelaCadastro;
@@ -151,6 +152,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuControleEstoque.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         menuMateriaisemFalta.setText("Materiais em falta");
+        menuMateriaisemFalta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMateriaisemFaltaActionPerformed(evt);
+            }
+        });
         menuControleEstoque.add(menuMateriaisemFalta);
 
         menuEntradaMateriais.setText("Entrada de materiais");
@@ -288,6 +294,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaEntradaMaterial entradaMaterial = new TelaEntradaMaterial();
         entradaMaterial.setVisible(true);
     }//GEN-LAST:event_menuEntradaMateriaisActionPerformed
+
+    private void menuMateriaisemFaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateriaisemFaltaActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+        TelaGrafico grafico =  new TelaGrafico();
+        grafico.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuMateriaisemFaltaActionPerformed
 
     /**
      * @param args the command line arguments
