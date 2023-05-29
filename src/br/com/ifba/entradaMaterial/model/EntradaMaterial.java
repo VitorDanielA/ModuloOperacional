@@ -3,9 +3,11 @@ package br.com.ifba.entradaMaterial.model;
 import br.com.ifba.infrastructure.model.PersistenceEntity;
 import br.com.ifba.fornecedor.model.Fornecedor;
 import br.com.ifba.material.model.Material;
-import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class EntradaMaterial extends PersistenceEntity {
-    private String data;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date data;
     @OneToOne
     private Material material;
     private String quantidade;
@@ -22,11 +25,11 @@ public class EntradaMaterial extends PersistenceEntity {
     @OneToOne
     private Fornecedor fornecedor;
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

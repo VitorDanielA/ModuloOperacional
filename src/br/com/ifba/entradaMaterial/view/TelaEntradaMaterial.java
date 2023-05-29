@@ -3,13 +3,16 @@ package br.com.ifba.entradaMaterial.view;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.entradaMaterial.model.EntradaMaterial;
 import br.com.ifba.infrastructure.support.StringUtil;
+import br.com.ifba.fornecedor.model.Fornecedor;
+import br.com.ifba.Combobox.ComboboxFornecedor;
 import br.com.ifba.usuario.view.TelaCadastro;
+import br.com.ifba.Combobox.ComboboxProduto;
+import br.com.ifba.material.model.Material;
 import javax.swing.table.DefaultTableModel;
 import br.com.ifba.home.view.TelaPrincipal;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.awt.Graphics;
 import java.util.List;
 
 /**
@@ -17,20 +20,41 @@ import java.util.List;
  * @author clebinho
  */
 public class TelaEntradaMaterial extends javax.swing.JFrame {
+    private ComboboxProduto comboboxMaterial;
+    private ComboboxFornecedor comboboxFornecedor;
     DefaultTableModel listaTabela;
     List<EntradaMaterial> itemLista = new ArrayList<>();
     List<EntradaMaterial> listaPesquisa = new ArrayList<>();
+    List<Material> listaMaterial = new ArrayList<>();
+    List<Fornecedor> listaFornecedor = new ArrayList<>();
     int selecionado = -1;
 
     /**
      * Creates new form TelaEntradaMaterial
      */
     EntradaMaterial entradaMaterial;
+    
     public TelaEntradaMaterial() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.itemLista = FacadeInstance.getInstance().getAllEntradaMaterial();
+        this.listaMaterial = FacadeInstance.getInstance().getAllMaterial();
+        this.listaFornecedor = FacadeInstance.getInstance().getAllFornecedor();
         atualizarEntradaMaterial(this.itemLista);
+        comboboxMaterial = new ComboboxProduto();
+        comboboxFornecedor = new ComboboxFornecedor();
+        
+        for(Material material : listaMaterial){
+            comboboxMaterial.addMaterial(material);
+        }
+        
+        this.cbxMaterial.setModel(comboboxMaterial);
+        
+        for(Fornecedor fornecedor : listaFornecedor){
+            comboboxFornecedor.addFornecedor(fornecedor);
+        }
+        
+        this.cbxFornecedor.setModel(comboboxFornecedor);
     }
     
     private void atualizarEntradaMaterial(List<EntradaMaterial> listaEntradaMaterial){
@@ -45,9 +69,9 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     
     private boolean validarCampos(EntradaMaterial entrada){
         StringUtil validacao = StringUtil.getInstance();
-        if(validacao.isEmpty(entrada.getData()) || /*validacao.isEmpty(entrada.getMaterial()) ||*/
-           validacao.isEmpty(entrada.getQuantidade()) || validacao.isEmpty(entrada.getNotaFiscal()) /*||
-           validacao.isEmpty(entrada.getFornecedor())*/)
+        if(validacao.isEmpty(entrada.getData().toString()) || validacao.isEmpty(entrada.getMaterial().toString()) ||
+           validacao.isEmpty(entrada.getQuantidade()) || validacao.isEmpty(entrada.getNotaFiscal()) ||
+           validacao.isEmpty(entrada.getFornecedor().toString()))
         {
             return false;
         }
@@ -80,13 +104,13 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
         lblQuantidade = new javax.swing.JLabel();
         lblNotaFiscal = new javax.swing.JLabel();
         lblFornecedor = new javax.swing.JLabel();
-        txtData = new javax.swing.JTextField();
-        txtMaterial = new javax.swing.JTextField();
         txtQtdMaterial = new javax.swing.JTextField();
         txtNotaFiscal = new javax.swing.JTextField();
-        txtFornecedor = new javax.swing.JTextField();
         lblHome = new javax.swing.JLabel();
         lblSair = new javax.swing.JLabel();
+        jdcDate = new com.toedter.calendar.JDateChooser();
+        cbxMaterial = new javax.swing.JComboBox<>();
+        cbxFornecedor = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -214,19 +238,19 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
                                 .addGap(24, 24, 24)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(txtNotaFiscal, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtQtdMaterial, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMaterial, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtData, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbxFornecedor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxMaterial, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jdcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(txtNotaFiscal, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtQtdMaterial, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(119, 119, 119))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(770, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblHome)
                 .addGap(50, 50, 50)
                 .addComponent(lblSair)
@@ -235,33 +259,36 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHome)
-                    .addComponent(lblSair))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblModulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblOperacional))
-                    .addComponent(lblLogo))
-                .addGap(19, 19, 19)
-                .addComponent(lblTitulo)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPesquisar)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblHome)
+                            .addComponent(lblSair))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblModulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblOperacional))
+                            .addComponent(lblLogo))
+                        .addGap(19, 19, 19)
+                        .addComponent(lblTitulo)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPesquisar)
+                            .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblData)
-                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMaterial)
-                            .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblQuantidade)
@@ -271,15 +298,14 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
                             .addComponent(lblNotaFiscal)
                             .addComponent(txtNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFornecedor)
-                            .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                            .addComponent(cbxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -300,11 +326,11 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         EntradaMaterial entradaMaterial = new EntradaMaterial();
-        entradaMaterial.setData(txtData.getText());
-       // entradaMaterial.setMaterial(txtMaterial.getText());
+        entradaMaterial.setData(jdcDate.getDate());
+        entradaMaterial.setMaterial((Material) comboboxMaterial.getSelectedItem());
         entradaMaterial.setQuantidade(txtQtdMaterial.getText());
         entradaMaterial.setNotaFiscal(txtNotaFiscal.getText());
-       // entradaMaterial.setFornecedor(txtFornecedor.getText());
+        entradaMaterial.setFornecedor((Fornecedor) comboboxFornecedor.getSelectedItem());
         
         if(validarCampos(entradaMaterial) == true){
             FacadeInstance.getInstance().saveEntradaMaterial(entradaMaterial);
@@ -318,11 +344,11 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        entradaMaterial.setData(txtData.getText());
-        //entradaMaterial.setMaterial(txtMaterial.getText());
+        entradaMaterial.setData(jdcDate.getDate());
+        entradaMaterial.setMaterial((Material) comboboxMaterial.getSelectedItem());
         entradaMaterial.setQuantidade(txtQtdMaterial.getText());
         entradaMaterial.setNotaFiscal(txtNotaFiscal.getText());
-        //entradaMaterial.setFornecedor(txtFornecedor.getText());
+        entradaMaterial.setFornecedor((Fornecedor) comboboxFornecedor.getSelectedItem());
 
         FacadeInstance.getInstance().updateEntradaMaterial(entradaMaterial);
         
@@ -426,8 +452,11 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JComboBox<String> cbxFornecedor;
+    private javax.swing.JComboBox<String> cbxMaterial;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdcDate;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblFornecedor;
     private javax.swing.JLabel lblHome;
@@ -441,9 +470,6 @@ public class TelaEntradaMaterial extends javax.swing.JFrame {
     private javax.swing.JLabel lblSair;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblEntradaMaterial;
-    private javax.swing.JTextField txtData;
-    private javax.swing.JTextField txtFornecedor;
-    private javax.swing.JTextField txtMaterial;
     private javax.swing.JTextField txtNotaFiscal;
     private javax.swing.JTextField txtPesquisar;
     private javax.swing.JTextField txtQtdMaterial;

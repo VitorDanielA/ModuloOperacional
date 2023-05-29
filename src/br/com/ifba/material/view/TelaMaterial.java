@@ -5,12 +5,9 @@
 package br.com.ifba.material.view;
 
 import br.com.ifba.home.view.TelaPrincipal;
-import br.com.ifba.infrastructure.service.Facade;
 import br.com.ifba.infrastructure.service.FacadeInstance;
-import br.com.ifba.infrastructure.service.IFacade;
 import br.com.ifba.infrastructure.support.StringUtil;
 import br.com.ifba.material.model.Material;
-import br.com.ifba.material.dao.DaoMaterial;
 import br.com.ifba.usuario.view.TelaCadastro;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -454,16 +451,15 @@ public class TelaMaterial extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisarKeyReleased
                                        
     public void checaLista(){
-        String pesq = txtPesquisar.getText();//pegando o nome para pesquisar na lista de fornecedores
-        this.itemLista = FacadeInstance.getInstance().getAllMaterial();//pegando a lista de fornecedores
+        String pesq = txtPesquisar.getText();
+        this.itemLista = FacadeInstance.getInstance().getAllMaterial();
         int i = 0;
         for(; this.itemLista.size() > i; i++){
-            if(pesq.equals(itemLista.get(i).getNome())){/*checando. se o nome
-                digitado no campo é igual a algum nome dos fornecedores*/
-              listaPesquisa.add(itemLista.get(i));//o fornecedor que tem o nome condizente a pesquisa é passado para a nova listra             
+            if(pesq.equals(itemLista.get(i).getNome())){
+                listaPesquisa.add(itemLista.get(i));
             }
         }
-        this.atualizarMaterial(listaPesquisa);//Mostrando na lista;
+        this.atualizarMaterial(listaPesquisa);
     }
     
     /**

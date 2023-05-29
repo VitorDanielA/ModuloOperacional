@@ -15,7 +15,7 @@ import javax.swing.ComboBoxModel;
  * @author user
  */
 public class ComboboxModel extends AbstractListModel implements ComboBoxModel {
-
+    
     private List<Produto> listaProduto;
     private Produto produtoSelecionado;
 
