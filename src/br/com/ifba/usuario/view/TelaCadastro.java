@@ -11,9 +11,11 @@ import br.com.ifba.infrastructure.service.Facade;
 import br.com.ifba.infrastructure.service.FacadeInstance;
 import br.com.ifba.infrastructure.service.IFacade;
 import br.com.ifba.infrastructure.support.StringUtil;
+import br.com.ifba.material.model.Material;
 import br.com.ifba.usuario.model.Usuario;
 import br.com.ifba.usuario.view.RedefinirSenha;
 import br.com.ifba.usuario.view.TelaUsuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -75,6 +77,25 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         }
     }   
+    
+    
+    private void notificacao(List<Material> listaMaterial){
+        List lista = new ArrayList();
+        
+        for(Material al: listaMaterial){
+           if(Integer.parseInt(al.getEstoqueAtual()) <= Integer.parseInt(al.getEstoqueMinimo())){
+                lista.add(al.getNome());
+            }
+        }
+        
+        String nomes = "";
+        for(Object nome : lista){
+            nomes += nome+"\n";
+        }
+        
+        JOptionPane.showMessageDialog(null, "Materiais em falta:\n"+nomes, "Material em falta!", JOptionPane.ERROR_MESSAGE);
+
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -159,13 +180,16 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         // TODO add your handling code here:
         this.makeLogin();
-        
+        List<Material> itemLista;
         Usuario usu = this.validateLogin();
         
         if(usu != null){
             this.setVisible(false);
             TelaPrincipal principal = new TelaPrincipal();
             principal.setVisible(true);
+            
+            itemLista = FacadeInstance.getInstance().getAllMaterial();
+            notificacao(itemLista);
         }
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
