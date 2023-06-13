@@ -92,9 +92,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         for(Object nome : lista){
             nomes += nome+"\n";
         }
-        
-        JOptionPane.showMessageDialog(null, "Materiais em falta:\n"+nomes, "Material em falta!", JOptionPane.ERROR_MESSAGE);
-
+        if(lista.isEmpty() == false){
+            JOptionPane.showMessageDialog(null, "Materiais em falta:\n"+nomes, "Material em falta!", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     @SuppressWarnings("unchecked")
