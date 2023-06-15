@@ -56,11 +56,11 @@ public class TelaProduto extends javax.swing.JFrame {
     
     private void atualizarProduto(List<Produto> listaProduto){
         //double valorTotal;
-        this.listaTabela =  new DefaultTableModel(null, new String [] {"Código", "Nome", "Descrição", "Estoque","Qtd Materiais"});
+        this.listaTabela =  new DefaultTableModel(null, new String [] {"Código", "Nome", "Descrição", "Estoque","Material","Qtd Materiais"});
         
         for(Produto pd: listaProduto){
            // valorTotal = Integer.parseInt(pd.getQuantidade()) * Integer.parseInt(pd.getValor());
-            listaTabela.addRow(new Object[]{pd.getCodigo(), pd.getNome(), pd.getDescricao(), pd.getEstoque(), pd.getQuantidade()}); //valorTotal
+            listaTabela.addRow(new Object[]{pd.getCodigo(), pd.getNome(), pd.getDescricao(), pd.getEstoque(),pd.getMaterial(),pd.getQuantidade()}); //valorTotal
         }
         
         this.tblProdutos.setModel(this.listaTabela);
@@ -277,7 +277,7 @@ public class TelaProduto extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEstoque)
                             .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -322,7 +322,7 @@ public class TelaProduto extends javax.swing.JFrame {
                                         .addComponent(btnEditar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnExcluir)
-                                        .addGap(78, 78, 78)
+                                        .addGap(79, 79, 79)
                                         .addComponent(btnAdd))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -488,6 +488,7 @@ public class TelaProduto extends javax.swing.JFrame {
                     produto.getNome(),
                     produto.getDescricao(),
                     produto.getEstoque(),
+                    produto.getMaterial(),
                     produto.getQuantidade(),
                     //produto.getValor(),
                 });
