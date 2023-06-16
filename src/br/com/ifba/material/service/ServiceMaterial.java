@@ -9,6 +9,7 @@ import br.com.ifba.material.dao.DaoMaterial;
 import br.com.ifba.material.dao.IDaoMaterial;
 import br.com.ifba.material.model.Material;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,10 @@ public class ServiceMaterial implements IServiceMaterial {
     
     //Material inválido
     public final static String MATERIAL_INVALIDO = "Material inválido";
+    
+    //Material Cadastrado em Produto
+    public final static String MATERIAL_CADASTRADO = "Material está sendo utilizado em produto";
+    
     
     //Criando objeto de instância
     
@@ -55,6 +60,11 @@ public class ServiceMaterial implements IServiceMaterial {
         if(material == null){
             throw new BusinessException(MATERIAL_NULL);
         } else if(daoMaterial.findById(material.getId()) != null){
+            if (material.getProduto()== null){
+                JOptionPane.showMessageDialog(null, MATERIAL_CADASTRADO, "Atenção", JOptionPane.WARNING_MESSAGE);
+
+                throw new BusinessException(MATERIAL_CADASTRADO);
+            }
             this.daoMaterial.delete(material);
             return;
         } 

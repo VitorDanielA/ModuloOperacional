@@ -5,7 +5,11 @@
 package br.com.ifba.material.model;
 
 import br.com.ifba.infrastructure.model.PersistenceEntity;
+import br.com.ifba.produtos.model.Produto;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +26,10 @@ public class Material extends PersistenceEntity{
     private String valor;
     private String estoqueAtual;
     private String estoqueMinimo;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "produto_id", referencedColumnName = "ID")
+    private Produto produto;
 
     //Getters and Setters
 
@@ -77,5 +85,14 @@ public class Material extends PersistenceEntity{
     public String toString() {
         return nome;
     }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+    
     
 }
